@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum PartType {
+  CASE
+  MOVEMENT
+  DIAL
+  BEZEL
+  HANDS
+  ROTOR
+  CRYSTAL
+}
+
+model Part {
+  id          Int      @id @default(autoincrement())
+  name        String
+  type        PartType
+  description String
+  cost        Decimal  @db.Decimal(10, 2)
+  modelUrl    String
+  itemUrl     String
+
+  compatibilitiesAsPart1 PartCompatibility[] @relation("Part1")
+  compatibilitiesAsPart2 PartCompatibility[] @relation("Part2")
+}
+
+model PartCompatibility {
+  part1Id Int
+  part2Id Int
+
+  part1 Part @relation("Part1", fields: [part1Id], references: [id], onDelete: Cascade)
+  part2 Part @relation("Part2", fields: [part2Id], references: [id], onDelete: Cascade)
+
+  @@id([part1Id, part2Id])
+}

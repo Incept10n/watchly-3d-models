@@ -16,3 +16,9 @@ before running application:
 ```
 npx prisma migrate deploy
 ```
+
+---
+.env file docs:
+```
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=public"
+```

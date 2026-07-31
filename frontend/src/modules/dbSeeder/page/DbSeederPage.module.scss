@@ -1,0 +1,53 @@
+.page {
+  display: grid;
+
+  grid-template-columns: 350px 1fr;
+
+  height: 100vh;
+}
+
+.sidebar {
+  border-right: 1px solid #ddd;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 20px;
+
+  border-bottom: 1px solid #ddd;
+}
+
+.content {
+  padding: 30px;
+
+  overflow-y: auto;
+}
+
+.title {
+  font-size: 24px;
+
+  margin-bottom: 25px;
+}
+
+.delete {
+  margin-top: 20px;
+
+  padding: 10px;
+
+  background: #c0392b;
+
+  color: white;
+
+  border: none;
+
+  cursor: pointer;
+}

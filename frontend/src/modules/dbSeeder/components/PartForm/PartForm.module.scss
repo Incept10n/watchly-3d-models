@@ -1,0 +1,19 @@
+.form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+input,
+textarea,
+select {
+  padding: 10px;
+
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 120px;
+}

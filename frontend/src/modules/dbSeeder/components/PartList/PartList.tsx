@@ -1,4 +1,4 @@
-import type { Part } from "../../api/types";
+import type { Part } from "@/shared/types";
 
 import { PartCard } from "../PartCard";
 

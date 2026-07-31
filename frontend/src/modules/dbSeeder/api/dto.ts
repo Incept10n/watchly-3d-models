@@ -1,4 +1,4 @@
-import type { PartType } from "./types";
+import type { PartType } from "@/shared/types";
 
 export interface SeedPartDto {
   name: string;

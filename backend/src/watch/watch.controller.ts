@@ -5,12 +5,9 @@ import { WatchService } from './watch.service';
 export class WatchController {
   constructor(private watchService: WatchService) {}
 
-  @Get('compatable-parts')
-  public getCompatable(
-    @Query('caseId') caseId: number | undefined,
-    @Query('movementId') movementId: number | undefined,
-  ) {
-    return this.watchService.getCompatible(caseId, movementId);
+  @Get('compatible-parts')
+  public getCompatable(@Query('partId') partId: number) {
+    return this.watchService.getCompatible(partId);
   }
 
   @Get('parts')

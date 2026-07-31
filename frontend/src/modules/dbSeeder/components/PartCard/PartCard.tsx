@@ -1,4 +1,4 @@
-import type { Part } from "../../api/types";
+import type { Part } from "@/shared/types";
 
 import styles from "./PartCard.module.scss";
 

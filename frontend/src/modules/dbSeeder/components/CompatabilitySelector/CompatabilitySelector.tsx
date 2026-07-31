@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { dbSeederApi } from "../../api/dbSeederApi";
-import type { PartType } from "../../api/types";
+import type { PartType } from "@/shared/types";
 
 import styles from "./CompatabilitySelector.module.scss";
 

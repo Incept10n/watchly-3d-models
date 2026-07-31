@@ -10,9 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/ramda": "^0.32.0",
+    "clsx": "^2.1.1",
+    "ramda": "^0.32.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "sass": "^1.102.0"
+    "react-router": "^8.3.0",
+    "sass": "^1.102.0",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
+import type { PartType } from "@/shared/types";
+
 import type { PartDetailsDto, SeedPartDto } from "../../api/dto";
-import type { PartType } from "../../api/types";
 import { CompatabilitySelector } from "../CompatabilitySelector";
 
 import styles from "./PartForm.module.scss";

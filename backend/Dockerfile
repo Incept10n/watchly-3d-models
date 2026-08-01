@@ -3,9 +3,6 @@ FROM node:26
 WORKDIR /app
 COPY . .
 
-# COPY package*.json ./
-# COPY prisma ./prisma/
-
 RUN npm install
 RUN npx prisma generate
 

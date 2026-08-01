@@ -9,4 +9,8 @@ export const watchConstructorApi = {
   getCompatibleParts(part: number) {
     return request<Part[]>(`/watch/compatible-parts?partId=${part}`);
   },
+
+  getInitialPartsSequence() {
+    return request<Part[]>(`/watch/initial-Parts`);
+  },
 };

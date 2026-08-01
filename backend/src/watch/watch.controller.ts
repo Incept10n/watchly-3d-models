@@ -14,4 +14,9 @@ export class WatchController {
   public getAllParts() {
     return this.watchService.getAll();
   }
+
+  @Get('initial-parts')
+  public getInitialParts() {
+    return this.watchService.getFirstCompatableSequence();
+  }
 }

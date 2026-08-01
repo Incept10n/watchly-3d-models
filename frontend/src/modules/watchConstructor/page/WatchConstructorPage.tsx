@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { PartTabs, ThreeDModelDisplayer } from "../components";
+import { PartSelector, PartTabs, ThreeDModelDisplayer } from "../components";
 import { watchConstructorApi } from "../api/watchConstructorApi";
 import { useWatchConstructor } from "../store";
 
@@ -11,9 +11,21 @@ export const WatchConstructorPage = () => {
 
   useEffect(() => {
     const initialLoad = async () => {
-      const allParts = await watchConstructorApi.getAllParts();
+      const [allParts, initialPartSequence] = await Promise.all([
+        watchConstructorApi.getAllParts(),
+        watchConstructorApi.getInitialPartsSequence(),
+      ]);
 
       watchConstructor.setParts(allParts);
+      watchConstructor.changeCurrentWatch({
+        CASE: initialPartSequence.find((part) => part.type === "CASE"),
+        MOVEMENT: initialPartSequence.find((part) => part.type === "MOVEMENT"),
+        BEZEL: initialPartSequence.find((part) => part.type === "BEZEL"),
+        HANDS: initialPartSequence.find((part) => part.type === "HANDS"),
+        ROTOR: initialPartSequence.find((part) => part.type === "ROTOR"),
+        DIAL: initialPartSequence.find((part) => part.type === "DIAL"),
+        CRYSTAL: initialPartSequence.find((part) => part.type === "CRYSTAL"),
+      });
     };
 
     initialLoad();
@@ -23,6 +35,7 @@ export const WatchConstructorPage = () => {
     <div>
       <PartTabs className={styles.tabs} />
       <ThreeDModelDisplayer />
+      <PartSelector />
     </div>
   );
 };

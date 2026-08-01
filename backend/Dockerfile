@@ -1,16 +1,22 @@
 FROM node:26
 
-WORKDIR /app
+# Set the working directory inside the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install the application dependencies
+RUN npm install
+
+# Copy the rest of the application files
 COPY . .
 
-# COPY package*.json ./
-# COPY prisma ./prisma/
-
-RUN npm install
-RUN npx prisma generate
-
+# Build the NestJS application
 RUN npm run build
 
+# Expose the application port
 EXPOSE 3000
 
-CMD ["sh", "-c", "npm run start:prod"]
+# Command to run the application
+CMD ["node", "dist/src/main"]

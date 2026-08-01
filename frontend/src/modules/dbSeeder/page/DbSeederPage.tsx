@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
 import { dbSeederApi } from "../api/dbSeederApi";
-import type { Part } from "../api/types";
 import type { PartDetailsDto, SeedPartDto } from "../api/dto";
 import { PartList } from "../components/PartList";
 import { PartForm } from "../components/PartForm";
+import type { Part } from "@/shared/types";
 
 import styles from "./DbSeederPage.module.scss";
 

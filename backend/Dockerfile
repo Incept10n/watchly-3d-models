@@ -1,30 +1,17 @@
-FROM node:26-alpine3.23 AS builder
+FROM node:26-alpine3.23
 
 WORKDIR /app
 
 COPY package*.json ./
 COPY prisma ./prisma/
 
-RUN npm install
+RUN npm install --production
 
 RUN npx prisma generate
 
 COPY . .
 
 RUN npm run build
-
-FROM node:26-alpine3.23
-
-WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm install --production
-
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/prisma ./prisma
-
-COPY --from=builder /app/package*.json ./
 
 EXPOSE 3000
 

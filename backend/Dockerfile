@@ -1,11 +1,11 @@
-FROM node:26-alpine3.23
+FROM node:26
 
 WORKDIR /app
 
 COPY package*.json ./
 COPY prisma ./prisma/
 
-RUN npm install --production
+RUN npm install
 
 RUN npx prisma generate
 

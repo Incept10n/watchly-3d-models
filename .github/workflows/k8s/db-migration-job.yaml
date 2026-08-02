@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+  namespace: watchly-3d-models
+spec:
+  ttlSecondsAfterFinished: 300  # Auto-cleanup after 5 minutes
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: db-migration
+        image: incept1on/watchly-3d-models:back
+        imagePullPolicy: Always  # Force pull every time
+        command: ["sh", "-c", "npx prisma migrate deploy"]
+        env:
+        - name: WH_DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: watchly-3d-models-secret
+              key: WH_DATABASE_URL

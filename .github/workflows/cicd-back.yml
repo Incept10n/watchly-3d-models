@@ -48,6 +48,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-push-back
     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
       - name: Get kubectl binary
         uses: tale/kubectl-action@v1
         with:
@@ -55,7 +58,10 @@ jobs:
 
       - name: Run database migrations
         run: |
-          kubectl run db-migration --image=incept1on/watchly-3d-models:back --restart=Never --rm --attach --quiet --command -- sh -c "npx prisma migrate deploy" -n watchly-3d-models --overrides='{"spec":{"containers":[{"env":[{"name":"WH_DATABASE_URL","valueFrom":{"secretKeyRef":{"name":"watchly-3d-models-secret","key":"WH_DATABASE_URL"}}}]}]}}'
+          kubectl delete job db-migration -n watchly-3d-models
+          kubectl apply -f .github/k8s/db-migration-job.yaml
+          kubectl wait --for=condition=complete job/db-migration -n watchly-3d-models --timeout=300s
+          kubectl logs job/db-migration -n watchly-3d-models
 
       - name: Migrations completed
         run: |

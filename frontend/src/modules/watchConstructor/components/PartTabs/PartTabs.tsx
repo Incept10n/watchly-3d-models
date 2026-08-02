@@ -23,11 +23,9 @@ type PartTabsProps = {
 };
 
 export const PartTabs: FC<PartTabsProps> = ({ className }) => {
-  const { switchTab, currentTab } = useWatchConstructor();
+  const { setTab, currentTab } = useWatchConstructor();
 
-  const handleTabClick = (tab: PartType) => {
-    switchTab(tab);
-  };
+  const handleTabClick = (tab: PartType) => setTab(tab);
 
   return (
     <div className={clsx(styles.tabContainer, className)}>

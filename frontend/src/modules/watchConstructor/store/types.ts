@@ -1,15 +1,24 @@
-import type { Nullable, Part, PartType } from "@/shared/types";
+import type { Part, PartType } from "@/shared/types";
 
 export type WatchConstructorState = {
   parts: Part[];
-  currentTab: PartType;
+  compatability: CompatabilityArray;
   currentWatch: ChosenWatch;
+  currentTab: PartType;
 };
 
-export type ChosenWatch = Record<PartType, Nullable<Part>>;
+export type CompatabilityPair = {
+  baseId: number;
+  compatableIds: number[];
+};
+export type CompatabilityArray = CompatabilityPair[];
+
+export type ChosenWatch = Record<PartType, Part>;
 
 export type WatchConstructorActions = {
-  switchTab: (tab: PartType) => void;
-  changeCurrentWatch: (nextCurrentWatch: Partial<ChosenWatch>) => void;
+  setTab: (tab: PartType) => void;
+  setCompatability: (compatability: CompatabilityArray) => void;
   setParts: (parts: Part[]) => void;
+
+  changeCurrentWatch: (nextCurrentWatch: Partial<ChosenWatch>) => void;
 };

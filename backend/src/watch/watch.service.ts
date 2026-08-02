@@ -11,20 +11,30 @@ import { PrismaService } from 'src/prisma/prisma.service';
 // as we can see this is a simple tree
 // we query only 2 times to know the compatable parts
 
+type CompatabilityPair = {
+  baseId: number;
+  compatableIds: number[];
+};
+type CompatabilityArray = CompatabilityPair[];
+
 @Injectable()
 export class WatchService {
   constructor(private prismaService: PrismaService) {}
 
-  public async getCompatible(partId: number) {
-    const compatableWithPart =
+  public async getCompatible(partIds: number[]): Promise<CompatabilityArray> {
+    const allCompatibleItems =
       await this.prismaService.partCompatibility.findMany({
-        include: { part2: true },
-        where: {
-          part1Id: partId,
-        },
+        select: { part1Id: true, part2Id: true },
+        where: { part1Id: { in: partIds } },
       });
 
-    return compatableWithPart.map((part) => part.part2);
+    return partIds.map((baseId) => {
+      const compatableIds = allCompatibleItems
+        .filter((item) => item.part1Id === baseId)
+        .map((item) => item.part2Id);
+
+      return { baseId, compatableIds };
+    });
   }
 
   public async getAll() {
@@ -98,9 +108,7 @@ export class WatchService {
     if (!firstGlass) throw this.PartNotPresentInDbException('CRYSTAL');
     finalIds.push(firstGlass);
 
-    return this.prismaService.part.findMany({
-      where: { id: { in: finalIds } },
-    });
+    return finalIds;
   }
 
   private PartNotPresentInDbException(partType: PartType) {

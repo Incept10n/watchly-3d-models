@@ -1,10 +1,10 @@
-import { useEffect, useState, type FC, type ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 import clsx from "clsx";
 
 import type { Part } from "@/shared/types";
 import { useWatchConstructor } from "../../store";
-import { watchConstructorApi } from "../../api/watchConstructorApi";
 import { PartSwitcher } from "./ui";
+import { getAllOfType } from "../../utils";
 
 import styles from "./PartSelector.module.scss";
 
@@ -17,47 +17,10 @@ export const PartSelector: FC<PartSelectorProps> = ({
   children,
   className,
 }) => {
-  const { changeCurrentWatch, currentTab, parts, currentWatch } =
+  const { changeCurrentWatch, currentWatch, currentTab, parts, compatability } =
     useWatchConstructor();
-  const [compatiblePartIds, setCompatiblePartIds] = useState<number[]>([]);
 
-  useEffect(() => {
-    const fetchCompatibleParts = async () => {
-      if (currentTab === "CASE") {
-        setCompatiblePartIds(
-          parts.filter((part) => part.type === "CASE").map((part) => part.id),
-        );
-        return;
-      }
-
-      if (currentTab === "MOVEMENT" || currentTab === "BEZEL") {
-        if (!currentWatch.CASE) {
-          throw new Error("no case was chosen");
-        }
-
-        const compatibleParts = await watchConstructorApi.getCompatibleParts(
-          currentWatch.CASE.id,
-        );
-
-        setCompatiblePartIds(compatibleParts.map((part) => part.id));
-        return;
-      }
-
-      // if it's not the case or movement bezel, then it's everything else and it depends on movement
-      if (!currentWatch.MOVEMENT) {
-        throw new Error("no movement was chosen");
-      }
-
-      const compatibleParts = await watchConstructorApi.getCompatibleParts(
-        currentWatch.MOVEMENT.id,
-      );
-      setCompatiblePartIds(compatibleParts.map((part) => part.id));
-    };
-
-    fetchCompatibleParts();
-  }, [currentTab, parts]);
-
-  const handleWatchPartClick = (part: Part) => {
+  const handleWatchPartClick = async (part: Part) => {
     changeCurrentWatch({ [currentTab]: part });
   };
 
@@ -65,17 +28,21 @@ export const PartSelector: FC<PartSelectorProps> = ({
     <div className={clsx(styles.partSelectorContainer, className)}>
       <PartSwitcher
         type="buttons"
-        parts={parts.filter((part) => part.type === currentTab)}
-        selectedId={currentWatch[currentTab]?.id || -1}
-        compatiblePartIds={compatiblePartIds}
+        parts={getAllOfType(currentTab, parts)}
+        selectedId={currentWatch[currentTab].id}
+        compatiblePartIds={compatability
+          .flatMap((compItem) => compItem.compatableIds)
+          .concat(compatability.map((part) => part.baseId))}
         onPartClick={handleWatchPartClick}
       />
       <div className={styles.modelDisplayer}>{children}</div>
       <PartSwitcher
         type="switcher"
-        selectedId={currentWatch[currentTab]?.id || -1}
-        parts={parts.filter((part) => part.type === currentTab)}
-        compatiblePartIds={compatiblePartIds}
+        parts={getAllOfType(currentTab, parts)}
+        selectedId={currentWatch[currentTab].id}
+        compatiblePartIds={compatability
+          .flatMap((compItem) => compItem.compatableIds)
+          .concat(compatability.map((part) => part.baseId))}
         onPartClick={handleWatchPartClick}
       />
     </div>

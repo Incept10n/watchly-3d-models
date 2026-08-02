@@ -1,23 +1,24 @@
 import { create } from "zustand";
 
-import type { WatchConstructorState, WatchConstructorActions } from "./types";
+import type {
+  WatchConstructorState,
+  WatchConstructorActions,
+  ChosenWatch,
+  CompatabilityArray,
+} from "./types";
 
 export const useWatchConstructor = create<
   WatchConstructorState & WatchConstructorActions
 >((set) => ({
   parts: [],
+  compatability: [],
   currentTab: "CASE",
-  currentWatch: {
-    CASE: null,
-    BEZEL: null,
-    CRYSTAL: null,
-    DIAL: null,
-    HANDS: null,
-    MOVEMENT: null,
-    ROTOR: null,
-  },
-  switchTab: (tab) => set(() => ({ currentTab: tab })),
+  currentWatch: {} as ChosenWatch,
+
+  setTab: (tab) => set(() => ({ currentTab: tab })),
   setParts: (parts) => set(() => ({ parts })),
+  setCompatability: (compatability: CompatabilityArray) =>
+    set(() => ({ compatability })),
   changeCurrentWatch: (nextCurrentWatch) =>
     set((state) => ({
       currentWatch: {

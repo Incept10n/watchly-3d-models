@@ -4,7 +4,7 @@ on:
   schedule:
     # Runs at 2:00 AM UTC every day
     #- cron: "0 2 * * *"
-    - cron: "* * * * *" # added for test
+    - cron: "*/5 * * * *" # added for test
   workflow_dispatch: # Allows manual triggering for testing
 
 jobs:

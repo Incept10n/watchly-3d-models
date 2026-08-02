@@ -22,6 +22,7 @@ export const PartSelector: FC<PartSelectorProps> = ({ className }) => {
         setCompatiblePartIds(
           parts.filter((part) => part.type === "CASE").map((part) => part.id),
         );
+        return;
       }
 
       if (currentTab === "MOVEMENT" || currentTab === "BEZEL") {
@@ -34,6 +35,7 @@ export const PartSelector: FC<PartSelectorProps> = ({ className }) => {
         );
 
         setCompatiblePartIds(compatibleParts.map((part) => part.id));
+        return;
       }
 
       // if it's not the case or movement bezel, then it's everything else and it depends on movement
@@ -48,7 +50,7 @@ export const PartSelector: FC<PartSelectorProps> = ({ className }) => {
     };
 
     fetchCompatibleParts();
-  }, [currentWatch, currentTab, parts]);
+  }, [currentTab, parts]);
 
   const handleWatchPartClick = (part: Part) => {
     changeCurrentWatch({ [currentTab]: part });
@@ -56,17 +58,20 @@ export const PartSelector: FC<PartSelectorProps> = ({ className }) => {
 
   return (
     <div className={clsx(styles.partSelectorContainer, className)}>
-      {parts.map((part, index) => (
-        <button
-          key={index}
-          className={clsx(styles.part, {
-            [styles.disabled]: !compatiblePartIds.includes(part.id),
-          })}
-          onClick={() => handleWatchPartClick(part)}
-        >
-          {part.name}
-        </button>
-      ))}
+      {parts
+        .filter((part) => part.type === currentTab)
+        .map((part, index) => (
+          <button
+            key={index}
+            className={clsx(styles.part, {
+              [styles.disabled]: !compatiblePartIds.includes(part.id),
+            })}
+            disabled={!compatiblePartIds.includes(part.id)}
+            onClick={() => handleWatchPartClick(part)}
+          >
+            {part.name}
+          </button>
+        ))}
     </div>
   );
 };

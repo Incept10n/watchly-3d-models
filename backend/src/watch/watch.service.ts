@@ -18,13 +18,13 @@ export class WatchService {
   public async getCompatible(partId: number) {
     const compatableWithPart =
       await this.prismaService.partCompatibility.findMany({
-        select: { part2Id: true },
+        include: { part2: true },
         where: {
           part1Id: partId,
         },
       });
 
-    return compatableWithPart.map((value) => value.part2Id);
+    return compatableWithPart.map((part) => part.part2);
   }
 
   public async getAll() {

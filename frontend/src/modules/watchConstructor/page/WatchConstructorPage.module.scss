@@ -1,3 +1,19 @@
 .tabs {
   padding: 20px 40px;
 }
+
+.constructorContainer {
+  display: flex;
+
+  .leftSelector {
+    flex: 1;
+  }
+
+  .model {
+    flex: 3;
+  }
+
+  .rigthSelector {
+    flex: 1;
+  }
+}

@@ -17,7 +17,7 @@ export const ThreeDModelDisplayer: FC<ThreeDModelDisplayerProps> = ({
   return (
     <div className={clsx(styles.modelContainer, className)}>
       {Object.entries(currentWatch).map(([partName, part], index) => (
-        <div key={index}>
+        <div key={index} style={{ textAlign: "center" }}>
           {part?.name ??
             `${partName} is not present for this kind of case + movement combo`}
         </div>

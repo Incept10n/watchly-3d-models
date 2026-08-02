@@ -7,7 +7,10 @@ import { useWatchConstructor } from "../store";
 import styles from "./WatchConstructorPage.module.scss";
 
 export const WatchConstructorPage = () => {
-  const watchConstructor = useWatchConstructor();
+  const setParts = useWatchConstructor((state) => state.setParts);
+  const changeCurrentWatch = useWatchConstructor(
+    (state) => state.changeCurrentWatch,
+  );
 
   useEffect(() => {
     const initialLoad = async () => {
@@ -16,8 +19,8 @@ export const WatchConstructorPage = () => {
         watchConstructorApi.getInitialPartsSequence(),
       ]);
 
-      watchConstructor.setParts(allParts);
-      watchConstructor.changeCurrentWatch({
+      setParts(allParts);
+      changeCurrentWatch({
         CASE: initialPartSequence.find((part) => part.type === "CASE"),
         MOVEMENT: initialPartSequence.find((part) => part.type === "MOVEMENT"),
         BEZEL: initialPartSequence.find((part) => part.type === "BEZEL"),
@@ -29,13 +32,16 @@ export const WatchConstructorPage = () => {
     };
 
     initialLoad();
-  }, []);
+  }, [changeCurrentWatch, setParts]);
 
   return (
     <div>
       <PartTabs className={styles.tabs} />
-      <ThreeDModelDisplayer />
-      <PartSelector />
+      <div className={styles.constructorContainer}>
+        <PartSelector className={styles.leftSelector} />
+        <ThreeDModelDisplayer className={styles.model} />
+        <div className={styles.rightSelector}>hehe</div>
+      </div>
     </div>
   );
 };

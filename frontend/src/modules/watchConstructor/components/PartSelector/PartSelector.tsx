@@ -7,6 +7,7 @@ import { PartSwitcher } from "./ui";
 import { getAllOfType } from "../../utils";
 
 import styles from "./PartSelector.module.scss";
+import { watchConstructorApi } from "../../api/watchConstructorApi";
 
 export type PartSelectorProps = {
   className?: string;
@@ -17,11 +18,26 @@ export const PartSelector: FC<PartSelectorProps> = ({
   children,
   className,
 }) => {
-  const { changeCurrentWatch, currentWatch, currentTab, parts, compatability } =
-    useWatchConstructor();
+  const {
+    changeCurrentWatch,
+    currentWatch,
+    currentTab,
+    parts,
+    compatability,
+    setCompatability,
+  } = useWatchConstructor();
 
   const handleWatchPartClick = async (part: Part) => {
-    changeCurrentWatch({ [currentTab]: part });
+    const updatedWatch = {
+      ...currentWatch,
+      [currentTab]: part,
+    };
+
+    const dependencyTree =
+      await watchConstructorApi.formDependencyTree(updatedWatch);
+
+    changeCurrentWatch(dependencyTree.currentTree);
+    setCompatability(dependencyTree.compatability);
   };
 
   return (

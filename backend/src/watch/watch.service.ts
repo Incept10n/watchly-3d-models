@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { PartType } from 'generated/prisma/enums';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { ChosenWatch, FormDependencyTreeResponse } from './types';
+import { PartType } from 'generated/prisma/client';
 
 // compatability dependency table:
 /* cases <|- movement <|- hands
@@ -21,6 +22,134 @@ type CompatabilityArray = CompatabilityPair[];
 export class WatchService {
   constructor(private prismaService: PrismaService) {}
 
+  public async formDependencyTree(
+    currentTree: ChosenWatch,
+  ): Promise<FormDependencyTreeResponse> {
+    // Query 1: Get parts compatible with the CASE
+    const compatibleWithCase =
+      await this.prismaService.partCompatibility.findMany({
+        include: { part2: true },
+        where: { part1Id: currentTree.CASE.id },
+      });
+
+    // Check MOVEMENT compatibility with CASE
+    if (
+      !compatibleWithCase
+        .map((part) => part.part2Id)
+        .includes(currentTree.MOVEMENT.id)
+    ) {
+      const firstCompatibleMovement = compatibleWithCase.find(
+        (part) => part.part2.type === 'MOVEMENT',
+      );
+      if (!firstCompatibleMovement)
+        throw new Error(
+          `no compatible movement to the case with id ${currentTree.CASE.id}`,
+        );
+
+      currentTree.MOVEMENT = firstCompatibleMovement.part2;
+    }
+
+    // Check BEZEL compatibility with CASE
+    if (
+      !compatibleWithCase
+        .map((part) => part.part2Id)
+        .includes(currentTree.BEZEL.id)
+    ) {
+      const firstCompatibleBezel = compatibleWithCase.find(
+        (part) => part.part2.type === 'BEZEL',
+      );
+
+      if (!firstCompatibleBezel)
+        throw new Error(
+          `no compatible bezel to the case with id ${currentTree.CASE.id}`,
+        );
+
+      currentTree.BEZEL = firstCompatibleBezel.part2;
+    }
+
+    // Query 2: Get parts compatible with the MOVEMENT
+    const compatibleWithMovement =
+      await this.prismaService.partCompatibility.findMany({
+        include: { part2: true },
+        where: { part1Id: currentTree.MOVEMENT.id },
+      });
+
+    // Check HANDS compatibility with MOVEMENT
+    if (
+      !compatibleWithMovement
+        .map((part) => part.part2Id)
+        .includes(currentTree.HANDS.id)
+    ) {
+      const firstCompatibleHands = compatibleWithMovement.find(
+        (part) => part.part2.type === 'HANDS',
+      );
+      if (!firstCompatibleHands)
+        throw new Error(
+          `no compatible hands to the movement with id ${currentTree.MOVEMENT.id}`,
+        );
+
+      currentTree.HANDS = firstCompatibleHands.part2;
+    }
+
+    // Check ROTOR compatibility with MOVEMENT
+    if (
+      !compatibleWithMovement
+        .map((part) => part.part2Id)
+        .includes(currentTree.ROTOR.id)
+    ) {
+      const firstCompatibleRotor = compatibleWithMovement.find(
+        (part) => part.part2.type === 'ROTOR',
+      );
+      if (!firstCompatibleRotor)
+        throw new Error(
+          `no compatible rotor to the movement with id ${currentTree.MOVEMENT.id}`,
+        );
+
+      currentTree.ROTOR = firstCompatibleRotor.part2;
+    }
+
+    // Check DIAL compatibility with MOVEMENT
+    if (
+      !compatibleWithMovement
+        .map((part) => part.part2Id)
+        .includes(currentTree.DIAL.id)
+    ) {
+      const firstCompatibleDial = compatibleWithMovement.find(
+        (part) => part.part2.type === 'DIAL',
+      );
+      if (!firstCompatibleDial)
+        throw new Error(
+          `no compatible dial to the movement with id ${currentTree.MOVEMENT.id}`,
+        );
+
+      currentTree.DIAL = firstCompatibleDial.part2;
+    }
+
+    // Check GLASS compatibility with MOVEMENT
+    if (
+      !compatibleWithMovement
+        .map((part) => part.part2Id)
+        .includes(currentTree.CRYSTAL.id)
+    ) {
+      const firstCompatibleGlass = compatibleWithMovement.find(
+        (part) => part.part2.type === 'CRYSTAL',
+      );
+      if (!firstCompatibleGlass)
+        throw new Error(
+          `no compatible glass to the movement with id ${currentTree.MOVEMENT.id}`,
+        );
+
+      currentTree.CRYSTAL = firstCompatibleGlass.part2;
+    }
+
+    const compatability = await this.getCompatible([
+      currentTree.CASE.id,
+      currentTree.MOVEMENT.id,
+    ]);
+
+    return { currentTree, compatability };
+  }
+
   public async getCompatible(partIds: number[]): Promise<CompatabilityArray> {
     const allCompatibleItems =
       await this.prismaService.partCompatibility.findMany({
@@ -28,13 +157,24 @@ export class WatchService {
         where: { part1Id: { in: partIds } },
       });
 
-    return partIds.map((baseId) => {
-      const compatableIds = allCompatibleItems
-        .filter((item) => item.part1Id === baseId)
-        .map((item) => item.part2Id);
-
-      return { baseId, compatableIds };
+    const allCases = await this.prismaService.part.findMany({
+      select: { id: true },
+      where: { type: 'CASE' },
     });
+
+    return partIds
+      .map((baseId) => {
+        const compatableIds = allCompatibleItems
+          .filter((item) => item.part1Id === baseId)
+          .map((item) => item.part2Id);
+
+        return { baseId, compatableIds };
+      })
+      .concat(
+        allCases.map((caseItem) => {
+          return { baseId: caseItem.id, compatableIds: [caseItem.id] };
+        }),
+      );
   }
 
   public async getAll() {
@@ -108,7 +248,10 @@ export class WatchService {
     if (!firstGlass) throw this.PartNotPresentInDbException('CRYSTAL');
     finalIds.push(firstGlass);
 
-    return finalIds;
+    return {
+      ids: finalIds,
+      compatability: await this.getCompatible([firstCase.id, firstMovementId]),
+    };
   }
 
   private PartNotPresentInDbException(partType: PartType) {

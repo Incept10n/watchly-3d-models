@@ -1,14 +1,15 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { WatchService } from './watch.service';
+import { ChosenWatch } from './types';
 
 @Controller('watch')
 export class WatchController {
   constructor(private watchService: WatchService) {}
 
-  @Get('compatible-parts')
-  public getCompatable(@Query('partIds') partIds: string) {
-    return this.watchService.getCompatible(
-      partIds.split(',').map((item) => parseInt(item)),
+  @Get('correctTreeData')
+  public getCompatable(@Query('currentTree') currentTree: string) {
+    return this.watchService.formDependencyTree(
+      JSON.parse(currentTree) as ChosenWatch,
     );
   }
 

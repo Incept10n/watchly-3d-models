@@ -37,11 +37,9 @@ export const WatchConstructorPage = () => {
   return (
     <div>
       <PartTabs className={styles.tabs} />
-      <div className={styles.constructorContainer}>
-        <PartSelector className={styles.leftSelector} />
+      <PartSelector className={styles.leftSelector}>
         <ThreeDModelDisplayer className={styles.model} />
-        <div className={styles.rightSelector}>hehe</div>
-      </div>
+      </PartSelector>
     </div>
   );
 };

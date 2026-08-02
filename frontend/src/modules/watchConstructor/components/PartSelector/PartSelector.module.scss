@@ -1,24 +1,7 @@
 .partSelectorContainer {
   display: flex;
-  flex-direction: column;
-  align-content: center;
 
-  .part {
-    padding: 5px 20px;
-    border: 1px solid grey;
-    border-radius: 14px;
-
-    &:not(:last-child) {
-      margin-bottom: 15px;
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &.disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
+  .modelDisplayer {
+    flex: 1;
   }
 }

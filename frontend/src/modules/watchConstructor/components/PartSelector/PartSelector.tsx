@@ -1,17 +1,22 @@
-import { useEffect, useState, type FC } from "react";
+import { useEffect, useState, type FC, type ReactNode } from "react";
 import clsx from "clsx";
 
 import type { Part } from "@/shared/types";
 import { useWatchConstructor } from "../../store";
 import { watchConstructorApi } from "../../api/watchConstructorApi";
+import { PartSwitcher } from "./ui";
 
 import styles from "./PartSelector.module.scss";
 
 export type PartSelectorProps = {
   className?: string;
+  children?: ReactNode;
 };
 
-export const PartSelector: FC<PartSelectorProps> = ({ className }) => {
+export const PartSelector: FC<PartSelectorProps> = ({
+  children,
+  className,
+}) => {
   const { changeCurrentWatch, currentTab, parts, currentWatch } =
     useWatchConstructor();
   const [compatiblePartIds, setCompatiblePartIds] = useState<number[]>([]);
@@ -58,20 +63,19 @@ export const PartSelector: FC<PartSelectorProps> = ({ className }) => {
 
   return (
     <div className={clsx(styles.partSelectorContainer, className)}>
-      {parts
-        .filter((part) => part.type === currentTab)
-        .map((part, index) => (
-          <button
-            key={index}
-            className={clsx(styles.part, {
-              [styles.disabled]: !compatiblePartIds.includes(part.id),
-            })}
-            disabled={!compatiblePartIds.includes(part.id)}
-            onClick={() => handleWatchPartClick(part)}
-          >
-            {part.name}
-          </button>
-        ))}
+      <PartSwitcher
+        type="buttons"
+        parts={parts.filter((part) => part.type === currentTab)}
+        compatiblePartIds={compatiblePartIds}
+        onPartClick={handleWatchPartClick}
+      />
+      <div className={styles.modelDisplayer}>{children}</div>
+      <PartSwitcher
+        type="switcher"
+        parts={parts.filter((part) => part.type === currentTab)}
+        compatiblePartIds={compatiblePartIds}
+        onPartClick={handleWatchPartClick}
+      />
     </div>
   );
 };

@@ -58,7 +58,7 @@ jobs:
 
       - name: Run database migrations
         run: |
-          kubectl delete job db-migration -n watchly-3d-models
+          kubectl delete job db-migration -n watchly-3d-models --ignore-not-found
           kubectl apply -f .github/k8s/db-migration-job.yaml
           kubectl wait --for=condition=complete job/db-migration -n watchly-3d-models --timeout=300s
           kubectl logs job/db-migration -n watchly-3d-models

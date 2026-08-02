@@ -48,7 +48,7 @@ export const PartSelector: FC<PartSelectorProps> = ({ className }) => {
     };
 
     fetchCompatibleParts();
-  }, [currentWatch]);
+  }, [currentWatch, currentTab, parts]);
 
   const handleWatchPartClick = (part: Part) => {
     changeCurrentWatch({ [currentTab]: part });
@@ -56,8 +56,9 @@ export const PartSelector: FC<PartSelectorProps> = ({ className }) => {
 
   return (
     <div className={clsx(styles.partSelectorContainer, className)}>
-      {parts.map((part) => (
+      {parts.map((part, index) => (
         <button
+          key={index}
           className={clsx(styles.part, {
             [styles.disabled]: !compatiblePartIds.includes(part.id),
           })}

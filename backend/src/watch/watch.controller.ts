@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
 import { WatchService } from './watch.service';
 
 @Controller('watch')
@@ -6,7 +6,7 @@ export class WatchController {
   constructor(private watchService: WatchService) {}
 
   @Get('compatible-parts')
-  public getCompatable(@Query('partId') partId: number) {
+  public getCompatable(@Query('partId', ParseIntPipe) partId: number) {
     return this.watchService.getCompatible(partId);
   }
 

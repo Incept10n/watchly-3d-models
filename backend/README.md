@@ -20,5 +20,5 @@ npx prisma migrate deploy
 ---
 .env file docs:
 ```
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=public"
+WH_DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=public"
 ```

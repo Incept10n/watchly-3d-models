@@ -1,7 +1,7 @@
 import type { FC } from "react";
+import clsx from "clsx";
 
 import { useWatchConstructor } from "../../store";
-import clsx from "clsx";
 
 import styles from "./ThreeDModelDisplayer.module.scss";
 
@@ -16,8 +16,8 @@ export const ThreeDModelDisplayer: FC<ThreeDModelDisplayerProps> = ({
 
   return (
     <div className={clsx(styles.modelContainer, className)}>
-      {Object.entries(currentWatch).map(([partName, part]) => (
-        <div>
+      {Object.entries(currentWatch).map(([partName, part], index) => (
+        <div key={index}>
           {part?.name ??
             `${partName} is not present for this kind of case + movement combo`}
         </div>

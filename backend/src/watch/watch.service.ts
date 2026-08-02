@@ -20,9 +20,7 @@ export class WatchService {
       await this.prismaService.partCompatibility.findMany({
         select: { part2Id: true },
         where: {
-          part1Id: {
-            equals: partId,
-          },
+          part1Id: partId,
         },
       });
 

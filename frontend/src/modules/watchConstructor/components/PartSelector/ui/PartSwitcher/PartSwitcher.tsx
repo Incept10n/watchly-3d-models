@@ -8,12 +8,14 @@ type PartSwitcherProps = {
   type: "buttons" | "switcher";
   parts: Part[];
   compatiblePartIds: number[];
+  selectedId: number;
   onPartClick: (part: Part) => void;
 };
 
 export const PartSwitcher: FC<PartSwitcherProps> = ({
   type,
   parts,
+  selectedId,
   compatiblePartIds,
   onPartClick,
 }) => {
@@ -24,6 +26,7 @@ export const PartSwitcher: FC<PartSwitcherProps> = ({
           key={part.id}
           className={clsx(styles.part, {
             [styles.disabled]: !compatiblePartIds.includes(part.id),
+            [styles.selected]: part.id === selectedId,
           })}
           disabled={!compatiblePartIds.includes(part.id)}
           onClick={() => onPartClick(part)}
@@ -40,6 +43,7 @@ export const PartSwitcher: FC<PartSwitcherProps> = ({
             key={part.id}
             className={clsx(styles.partImage, {
               [styles.disabled]: !compatiblePartIds.includes(part.id),
+              [styles.selected]: part.id === selectedId,
             })}
             disabled={!compatiblePartIds.includes(part.id)}
             onClick={() => onPartClick(part)}

@@ -4,6 +4,6 @@ import { DbSeederService } from './db-seeder.service';
 
 @Module({
   controllers: [DbSeederController],
-  providers: [DbSeederService]
+  providers: [DbSeederService],
 })
 export class DbSeederModule {}

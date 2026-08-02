@@ -20,6 +20,10 @@
       opacity: 0.4;
       cursor: not-allowed;
     }
+
+    &.selected {
+      border-width: 3px;
+    }
   }
 }
 
@@ -53,6 +57,10 @@
       &.disabled {
         opacity: 0.4;
         cursor: not-allowed;
+      }
+
+      &.selected {
+        border-width: 3px;
       }
     }
   }

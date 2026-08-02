@@ -66,12 +66,14 @@ export const PartSelector: FC<PartSelectorProps> = ({
       <PartSwitcher
         type="buttons"
         parts={parts.filter((part) => part.type === currentTab)}
+        selectedId={currentWatch[currentTab]?.id || -1}
         compatiblePartIds={compatiblePartIds}
         onPartClick={handleWatchPartClick}
       />
       <div className={styles.modelDisplayer}>{children}</div>
       <PartSwitcher
         type="switcher"
+        selectedId={currentWatch[currentTab]?.id || -1}
         parts={parts.filter((part) => part.type === currentTab)}
         compatiblePartIds={compatiblePartIds}
         onPartClick={handleWatchPartClick}

@@ -55,7 +55,7 @@ jobs:
 
       - name: Run database migrations
         run: |
-          kubectl run db-migration --image=incept1on/watchly-3d-models:back --restart=Never --rm --attach --quiet --command -- sh -c "npx prisma migrate deploy" -n watchly-3d-models --overrides='{"spec":{"containers":[{"name":"db-migration","env":[{"name":"WH_DATABASE_URL","valueFrom":{"secretKeyRef":{"name":"watchly-3d-models-secret","key":"WH_DATABASE_URL"}}}]}]}}'
+          kubectl run db-migration --image=incept1on/watchly-3d-models:back --restart=Never --rm --attach --quiet --command -- sh -c "npx prisma migrate deploy" -n watchly-3d-models --overrides='{"spec":{"containers":[{"env":[{"name":"WH_DATABASE_URL","valueFrom":{"secretKeyRef":{"name":"watchly-3d-models-secret","key":"WH_DATABASE_URL"}}}]}]}}'
 
       - name: Migrations completed
         run: |

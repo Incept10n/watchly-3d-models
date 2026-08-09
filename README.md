@@ -4,4 +4,6 @@
 
 ### TODO:
 - frontend
-    - think of algorithm that would work on any tree sequence (because rith now it only works only for these kind of parts)
+    - put different compatability rules in db for testing purposes
+    - fix material view (metallic texture isn't being rendered properly for some reason)
+    - is it really a good idea to store date in the public frontend folder or can we store it in backend?

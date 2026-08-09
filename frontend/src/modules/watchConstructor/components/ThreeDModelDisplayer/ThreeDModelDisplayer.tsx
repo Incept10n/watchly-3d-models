@@ -1,6 +1,8 @@
-import { Component, Suspense, useState, type FC, type ReactNode } from "react";
+import { Component, Suspense, useLayoutEffect, useState, type FC, type ReactNode } from "react";
 import clsx from "clsx";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
+import * as THREE from "three";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import {
   Bounds,
   OrbitControls,
@@ -39,6 +41,28 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 }
 
+// Metals (metalness ~1) reflect only the environment map — without one they
+// render flat and dark. Provide an offline studio-like env (no network fetch),
+// unlike drei's <Environment preset> which downloads an HDR at runtime.
+const StudioEnvironment = () => {
+  const { gl, scene } = useThree();
+
+  useLayoutEffect(() => {
+    const pmrem = new THREE.PMREMGenerator(gl);
+    const environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    /* eslint-disable react-hooks/immutability */
+    scene.environment = environment;
+    /* eslint-enable react-hooks/immutability */
+    return () => {
+      scene.environment = null;
+      environment.dispose();
+      pmrem.dispose();
+    };
+  }, [gl, scene]);
+
+  return null;
+};
+
 export const ThreeDModelDisplayer: FC<ThreeDModelDisplayerProps> = ({
   className,
 }) => {
@@ -55,6 +79,7 @@ export const ThreeDModelDisplayer: FC<ThreeDModelDisplayerProps> = ({
     <div className={clsx(styles.modelContainer, className)}>
       <Canvas dpr={[1, 2]}>
         <PerspectiveCamera makeDefault fov={45} position={[0, 0.3, 5]} />
+        <StudioEnvironment />
 
         <ambientLight intensity={0.6} />
         <hemisphereLight intensity={0.5} />

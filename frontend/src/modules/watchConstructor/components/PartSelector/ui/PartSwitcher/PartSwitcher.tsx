@@ -3,6 +3,7 @@ import type { FC } from "react";
 import clsx from "clsx";
 
 import styles from "./PartSwitcher.module.scss";
+import { Button } from "@/shared/ui";
 
 type PartSwitcherProps = {
   type: "buttons" | "switcher";
@@ -22,17 +23,16 @@ export const PartSwitcher: FC<PartSwitcherProps> = ({
   return type === "buttons" ? (
     <div className={styles.buttonSwitcherContainer}>
       {parts.map((part) => (
-        <button
+        <Button
           key={part.id}
-          className={clsx(styles.part, {
-            [styles.disabled]: !compatiblePartIds.includes(part.id),
+          className={clsx(styles.button, {
             [styles.selected]: part.id === selectedId,
           })}
           disabled={!compatiblePartIds.includes(part.id)}
           onClick={() => onPartClick(part)}
         >
           {part.name}
-        </button>
+        </Button>
       ))}
     </div>
   ) : (

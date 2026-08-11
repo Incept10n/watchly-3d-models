@@ -1,0 +1,34 @@
+.watchlyButton {
+  padding: 10px 40px;
+  border-radius: 16px;
+  max-width: 300px;
+  background-color: transparent;
+  border: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  line-height: 1;
+  vertical-align: middle;
+
+  outline: none;
+
+  box-shadow:
+    inset 0px 2px 4px rgba(0, 0, 0, 0.15),
+    0px 2px 4px rgba(0, 0, 0, 0.15);
+
+  &:hover {
+    box-shadow:
+      inset 0px 9px 18px rgba(20, 20, 20, 0.2),
+      0px 2px 4px rgba(0, 0, 0, 0.15);
+
+    cursor: pointer;
+  }
+
+  &:active {
+    box-shadow:
+      inset 0px 9px 18px rgba(92, 116, 203, 0.25),
+      0px 2px 4px rgba(0, 0, 0, 0.15);
+  }
+}

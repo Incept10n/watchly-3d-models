@@ -1,28 +1,15 @@
 .buttonSwitcherContainer {
   display: flex;
   flex-direction: column;
-  flex: 1;
 
-  .part {
-    padding: 5px 20px;
-    border: 1px solid grey;
-    border-radius: 14px;
-
+  .button {
     &:not(:last-child) {
       margin-bottom: 15px;
     }
 
-    &:hover {
-      cursor: pointer;
-    }
-
-    &.disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-
     &.selected {
-      border-width: 3px;
+      color: white;
+      background-color: rgba($color: #5c74cb80, $alpha: 0.5);
     }
   }
 }

@@ -2,22 +2,30 @@
 
 .tabContainer {
   display: flex;
+  position: relative;
 
   .tab {
     text-align: center;
     flex: 1;
-    font-size: variables.$baseFont;
-
-    border-bottom: 1px solid black;
-
+    font-size: variables.$font-size-base;
     padding: 2px 7px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
 
     &.active {
-      border-bottom: 3px solid black;
+      opacity: 1;
     }
 
     &:hover {
       cursor: pointer;
     }
+  }
+
+  .indicator {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    background-color: black;
+    transition: all 0.3s ease;
   }
 }

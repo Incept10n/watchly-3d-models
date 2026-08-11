@@ -4,6 +4,7 @@ import { PartSelector, PartTabs, ThreeDModelDisplayer } from "../components";
 import { watchConstructorApi } from "../api/watchConstructorApi";
 import { useWatchConstructor } from "../store";
 import type { PartType } from "@/shared/types";
+import { BasePage, Header } from "@/shared/ui";
 
 import styles from "./WatchConstructorPage.module.scss";
 
@@ -47,7 +48,6 @@ export const WatchConstructorPage = () => {
         setCompatability(initialPartSequence.compatability);
       } catch (error) {
         console.error("Failed to load initial watch data:", error);
-        // Handle error appropriately
       } finally {
         setIsLoading(false);
       }
@@ -61,11 +61,20 @@ export const WatchConstructorPage = () => {
   }
 
   return (
-    <div>
+    <BasePage
+      header={
+        <Header
+          headerName="Дизайн времени"
+          leftIcon={<div>watch icon</div>}
+          rightInfo={<div>contacts | phone</div>}
+        />
+      }
+      footer={<div></div>}
+    >
       <PartTabs className={styles.tabs} />
       <PartSelector className={styles.leftSelector}>
         <ThreeDModelDisplayer className={styles.model} />
       </PartSelector>
-    </div>
+    </BasePage>
   );
 };

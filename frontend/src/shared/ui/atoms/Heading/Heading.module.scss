@@ -1,0 +1,6 @@
+@use "@/shared/styles/variables";
+
+.heading {
+  font-size: variables.$font-size-xl;
+  font-weight: normal;
+}

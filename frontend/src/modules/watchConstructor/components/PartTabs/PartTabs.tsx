@@ -1,5 +1,5 @@
 import clsx from "clsx";
-
+import { useRef, useEffect, useState } from "react";
 import { PART_TYPES, type PartType } from "@/shared/types";
 import { useWatchConstructor } from "../../store";
 import type { FC } from "react";
@@ -24,11 +24,29 @@ type PartTabsProps = {
 
 export const PartTabs: FC<PartTabsProps> = ({ className }) => {
   const { setTab, currentTab } = useWatchConstructor();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
 
   const handleTabClick = (tab: PartType) => setTab(tab);
 
+  useEffect(() => {
+    if (containerRef.current) {
+      const activeTab = containerRef.current.querySelector(`.${styles.active}`);
+
+      if (activeTab) {
+        const containerRect = containerRef.current.getBoundingClientRect();
+        const tabRect = activeTab.getBoundingClientRect();
+
+        setIndicatorStyle({
+          left: tabRect.left - containerRect.left,
+          width: tabRect.width,
+        });
+      }
+    }
+  }, [currentTab]);
+
   return (
-    <div className={clsx(styles.tabContainer, className)}>
+    <div ref={containerRef} className={clsx(styles.tabContainer, className)}>
       {PART_TYPES.map((type, index) => (
         <div
           key={index}
@@ -38,6 +56,13 @@ export const PartTabs: FC<PartTabsProps> = ({ className }) => {
           {toRussianNames(type)}
         </div>
       ))}
+      <div
+        className={styles.indicator}
+        style={{
+          left: `${indicatorStyle.left}px`,
+          width: `${indicatorStyle.width}px`,
+        }}
+      />
     </div>
   );
 };

@@ -1,0 +1,1 @@
+export { WatchlyLogo } from "./WatchlyLogo";

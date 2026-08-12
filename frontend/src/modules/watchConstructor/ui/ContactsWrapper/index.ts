@@ -1,0 +1,1 @@
+export { ContactsWrapper } from "./ContactsWrapper";

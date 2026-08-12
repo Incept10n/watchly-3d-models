@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 
-import { PartSelector, PartTabs, ThreeDModelDisplayer } from "../components";
+import {
+  ContactsWrapper,
+  PartSelector,
+  PartTabs,
+  PhoneIcon,
+  ThreeDModelDisplayer,
+  UserIcon,
+} from "../ui";
 import { watchConstructorApi } from "../api/watchConstructorApi";
 import { useWatchConstructor } from "../store";
 import type { PartType } from "@/shared/types";
-import { BasePage, Header } from "@/shared/ui";
+import { BasePage, Header, WatchlyLogo } from "@/shared/ui";
 
 import styles from "./WatchConstructorPage.module.scss";
 
@@ -65,8 +72,13 @@ export const WatchConstructorPage = () => {
       header={
         <Header
           headerName="Дизайн времени"
-          leftIcon={<div>watch icon</div>}
-          rightInfo={<div>contacts | phone</div>}
+          leftIcon={<WatchlyLogo width={50} height={50} />}
+          rightInfo={
+            <ContactsWrapper>
+              <UserIcon width={25} height={25} />
+              <PhoneIcon width={25} height={25} />
+            </ContactsWrapper>
+          }
         />
       }
       footer={<div></div>}

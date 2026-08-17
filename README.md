@@ -6,7 +6,8 @@
 url: https://dev.watchly.inceptech.ru/
 
 ### TODO:
-- architecture:
-    - need to store part images for frontend to interact with them
-- frontend
-    - is it really a good idea to store date in the public frontend folder or can we store it in backend?
+    - add parts' pictures
+        * make pictures for each part and put them in public folder
+        * update prisma.schema to have pictureUrl
+        * make it so that entity from the backend is returned with updated db schema
+        * finish sliding thingy on the site

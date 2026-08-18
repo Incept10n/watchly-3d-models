@@ -30,6 +30,7 @@ model Part {
   description String
   cost        Decimal  @db.Decimal(10, 2)
   modelUrl    String
+  pictureUrl  String   @default("")
   itemUrl     String
 
   compatibilitiesAsPart1 PartCompatibility[] @relation("Part1")

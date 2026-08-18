@@ -21,6 +21,7 @@ const emptyForm: SeedPartDto = {
   type: "CASE",
 
   modelUrl: "",
+  pictureUrl: "",
   itemUrl: "",
 
   compatibilityIds: [],
@@ -88,6 +89,12 @@ export function PartForm({ part, onSave }: Props) {
         placeholder="Model URL"
         value={form.modelUrl}
         onChange={(e) => update("modelUrl", e.target.value)}
+      />
+
+      <input
+        placeholder="Picture URL"
+        value={form.pictureUrl}
+        onChange={(e) => update("pictureUrl", e.target.value)}
       />
 
       <input

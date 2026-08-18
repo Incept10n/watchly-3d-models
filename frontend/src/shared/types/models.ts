@@ -17,5 +17,6 @@ export type Part = {
   cost: number;
   type: PartType;
   modelUrl: string;
+  pictureUrl: string;
   itemUrl: string;
 };

@@ -16,6 +16,7 @@ export class SeedPartDto {
   cost: number;
   type: PartType;
   modelUrl: string;
+  pictureUrl: string;
   itemUrl: string;
 
   compatibilityIds: number[];

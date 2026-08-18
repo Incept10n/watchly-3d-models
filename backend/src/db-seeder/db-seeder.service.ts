@@ -27,6 +27,7 @@ export class DbSeederService {
         cost: dto.cost,
         type: dto.type,
         modelUrl: dto.modelUrl,
+        pictureUrl: dto.pictureUrl,
         itemUrl: dto.itemUrl,
       },
     });
@@ -105,6 +106,7 @@ export class DbSeederService {
       cost: Number(part.cost),
       type: part.type,
       modelUrl: part.modelUrl,
+      pictureUrl: part.pictureUrl,
       itemUrl: part.itemUrl,
 
       compatibilityIds: part.compatibilitiesAsPart2.map((c) => c.part1Id),
@@ -120,6 +122,7 @@ export class DbSeederService {
         cost: dto.cost,
         type: dto.type,
         modelUrl: dto.modelUrl,
+        pictureUrl: dto.pictureUrl,
         itemUrl: dto.itemUrl,
       },
     });

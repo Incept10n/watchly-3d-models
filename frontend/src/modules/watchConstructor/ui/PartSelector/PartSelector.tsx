@@ -5,9 +5,9 @@ import type { Part } from "@/shared/types";
 import { useWatchConstructor } from "../../store";
 import { PartSwitcher } from "./ui";
 import { getAllOfType } from "../../utils";
+import { watchConstructorApi } from "../../api/watchConstructorApi";
 
 import styles from "./PartSelector.module.scss";
-import { watchConstructorApi } from "../../api/watchConstructorApi";
 
 export type PartSelectorProps = {
   className?: string;

@@ -14,6 +14,7 @@ type SeedPart = {
   cost: number;
   type: PartType;
   modelUrl: string;
+  pictureUrl: string;
 };
 
 // modelUrl paths are served by the frontend from its public/ dir
@@ -24,6 +25,7 @@ const parts: SeedPart[] = [
     cost: 450,
     type: PartType.CASE,
     modelUrl: '/models/case/case.glb',
+    pictureUrl: '/pictures/case/case.png',
   },
 
   {
@@ -32,6 +34,7 @@ const parts: SeedPart[] = [
     cost: 1200,
     type: PartType.MOVEMENT,
     modelUrl: '',
+    pictureUrl: '/pictures/movement/first.png',
   },
   {
     name: 'Calibre 3285',
@@ -39,6 +42,7 @@ const parts: SeedPart[] = [
     cost: 1500,
     type: PartType.MOVEMENT,
     modelUrl: '',
+    pictureUrl: '/pictures/movement/second.png',
   },
 
   {
@@ -47,6 +51,7 @@ const parts: SeedPart[] = [
     cost: 210,
     type: PartType.BEZEL,
     modelUrl: '/models/bezel/blueBezel.glb',
+    pictureUrl: '/pictures/bezel/blueBezel.png',
   },
   {
     name: 'Stainless Steel Bezel',
@@ -54,6 +59,7 @@ const parts: SeedPart[] = [
     cost: 140,
     type: PartType.BEZEL,
     modelUrl: '/models/bezel/standardBezel.glb',
+    pictureUrl: '/pictures/bezel/standardBezel.png',
   },
   {
     name: 'Triangulated Bezel',
@@ -61,6 +67,7 @@ const parts: SeedPart[] = [
     cost: 180,
     type: PartType.BEZEL,
     modelUrl: '/models/bezel/triagnleBezel.glb',
+    pictureUrl: '/pictures/bezel/triangleBezel.png',
   },
 
   {
@@ -69,6 +76,7 @@ const parts: SeedPart[] = [
     cost: 90,
     type: PartType.HANDS,
     modelUrl: '/models/hands/defaultHands.glb',
+    pictureUrl: '/pictures/hands/defaultHands.png',
   },
   {
     name: 'Slim Dagger Hands',
@@ -76,6 +84,7 @@ const parts: SeedPart[] = [
     cost: 110,
     type: PartType.HANDS,
     modelUrl: '/models/hands/smallArrows.glb',
+    pictureUrl: '/pictures/hands/smallArrows.png',
   },
 
   {
@@ -84,6 +93,7 @@ const parts: SeedPart[] = [
     cost: 160,
     type: PartType.ROTOR,
     modelUrl: '/models/rotor/dummyRotor.glb',
+    pictureUrl: '/pictures/rotor/dummyRotor.png',
   },
 
   {
@@ -92,6 +102,7 @@ const parts: SeedPart[] = [
     cost: 250,
     type: PartType.DIAL,
     modelUrl: '/models/dial/greenDial.glb',
+    pictureUrl: '/pictures/dial/greenDial.png',
   },
   {
     name: 'Viox Starry Dial',
@@ -99,6 +110,7 @@ const parts: SeedPart[] = [
     cost: 300,
     type: PartType.DIAL,
     modelUrl: '/models/dial/vioxDial.glb',
+    pictureUrl: '/pictures/dial/vioxDial.png',
   },
 
   {
@@ -107,6 +119,7 @@ const parts: SeedPart[] = [
     cost: 120,
     type: PartType.CRYSTAL,
     modelUrl: '/models/crystal/defaultCrystal.glb',
+    pictureUrl: '/pictures/crystal/defaultCrystal.png',
   },
   {
     name: 'No-Date Sapphire Crystal',
@@ -114,6 +127,7 @@ const parts: SeedPart[] = [
     cost: 130,
     type: PartType.CRYSTAL,
     modelUrl: '/models/crystal/noDateCrystal.glb',
+    pictureUrl: '/pictures/crystal/noDateCrystal.png',
   },
 ];
 
@@ -131,6 +145,7 @@ async function main() {
         cost: part.cost,
         type: part.type,
         modelUrl: part.modelUrl,
+        pictureUrl: part.pictureUrl,
         itemUrl: '',
       },
     });

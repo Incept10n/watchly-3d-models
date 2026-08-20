@@ -1,4 +1,11 @@
-import { Component, Suspense, useLayoutEffect, useState, type FC, type ReactNode } from "react";
+import {
+  Component,
+  Suspense,
+  useLayoutEffect,
+  useState,
+  type FC,
+  type ReactNode,
+} from "react";
 import clsx from "clsx";
 import { Canvas, useThree } from "@react-three/fiber";
 import * as THREE from "three";
@@ -9,6 +16,8 @@ import {
   PerspectiveCamera,
   useProgress,
 } from "@react-three/drei";
+
+import { Button } from "@/shared/ui/atoms/Button";
 
 import { useWatchConstructor } from "../../store";
 import { PartModel } from "./PartModel";
@@ -85,7 +94,7 @@ export const ThreeDModelDisplayer: FC<ThreeDModelDisplayerProps> = ({
         <hemisphereLight intensity={0.5} />
         <directionalLight position={[5, 8, 6]} intensity={1.6} />
 
-        <Bounds key={boundsKey} fit clip observe margin={1.25}>
+        <Bounds key={boundsKey} fit clip observe margin={0.95}>
           <Suspense fallback={null}>
             {parts.map((part) => (
               <ErrorBoundary key={`${part.type}-${part.id}`} fallback={null}>
@@ -108,12 +117,12 @@ export const ThreeDModelDisplayer: FC<ThreeDModelDisplayerProps> = ({
       )}
 
       <div className={styles.controls}>
-        <button type="button" onClick={() => setAutoRotate((value) => !value)}>
-          {autoRotate ? "Stop rotation" : "Auto rotate"}
-        </button>
-        <button type="button" onClick={resetView}>
-          Reset view
-        </button>
+        <Button type="button" onClick={() => setAutoRotate((value) => !value)}>
+          {autoRotate ? "Остановить вращение" : "Возобновить вращение"}
+        </Button>
+        <Button type="button" onClick={resetView}>
+          Сбросить камеру
+        </Button>
       </div>
     </div>
   );

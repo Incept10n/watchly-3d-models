@@ -3,9 +3,8 @@
   width: 600px;
   height: 600px;
   max-width: 100%;
-  overflow: hidden;
   border-radius: 12px;
-  background: radial-gradient(ellipse at center, #2b2e3a 0%, #14151c 100%);
+  background: #fff;
   touch-action: none;
 }
 
@@ -14,7 +13,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #fff;
+  color: #14151c;
   font-size: 14px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -22,24 +21,11 @@
 
 .controls {
   position: absolute;
-  bottom: 16px;
+
+  bottom: -10px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(100%);
+
   display: flex;
   gap: 8px;
-
-  button {
-    padding: 8px 14px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background 0.15s ease;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.16);
-    }
-  }
 }

@@ -8,6 +8,7 @@ import { getAllOfType } from "../../utils";
 import { watchConstructorApi } from "../../api/watchConstructorApi";
 
 import styles from "./PartSelector.module.scss";
+import { RandomButton } from "../RandomButton";
 
 export type PartSelectorProps = {
   className?: string;
@@ -42,15 +43,18 @@ export const PartSelector: FC<PartSelectorProps> = ({
 
   return (
     <div className={clsx(styles.partSelectorContainer, className)}>
-      <PartSwitcher
-        type="buttons"
-        parts={getAllOfType(currentTab, parts)}
-        selectedId={currentWatch[currentTab].id}
-        compatiblePartIds={compatability
-          .flatMap((compItem) => compItem.compatableIds)
-          .concat(compatability.map((part) => part.baseId))}
-        onPartClick={handleWatchPartClick}
-      />
+      <div className={styles.leftSwitcherContainer}>
+        <PartSwitcher
+          type="buttons"
+          parts={getAllOfType(currentTab, parts)}
+          selectedId={currentWatch[currentTab].id}
+          compatiblePartIds={compatability
+            .flatMap((compItem) => compItem.compatableIds)
+            .concat(compatability.map((part) => part.baseId))}
+          onPartClick={handleWatchPartClick}
+        />
+        <RandomButton />
+      </div>
       <div className={styles.modelDisplayer}>{children}</div>
       <PartSwitcher
         type="switcher"

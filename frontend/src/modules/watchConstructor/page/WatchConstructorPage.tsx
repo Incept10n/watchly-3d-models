@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import {
   ContactsWrapper,
+  OrderButton,
   PartSelector,
   PartTabs,
   PhoneIcon,
@@ -87,6 +88,9 @@ export const WatchConstructorPage = () => {
       <PartSelector className={styles.leftSelector}>
         <ThreeDModelDisplayer />
       </PartSelector>
+      <div className={styles.orderButtonContainer}>
+        <OrderButton />
+      </div>
     </BasePage>
   );
 };

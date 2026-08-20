@@ -7,6 +7,10 @@
       margin-bottom: 15px;
     }
 
+    &:disabled {
+      cursor: not-allowed;
+    }
+
     &.selected {
       color: white;
       background-color: rgba($color: #5c74cb80, $alpha: 0.5);

@@ -25,10 +25,12 @@
   }
 
   .imageContainer {
-    height: 700px;
+    height: 600px;
 
     .imageOverflowContainer {
       position: absolute;
+      transition: transform 0.3s ease-in-out;
+      will-change: transform;
 
       .image {
         width: 300px;
@@ -39,6 +41,13 @@
 
         &:hover {
           cursor: pointer;
+        }
+
+        &.disabled {
+          &:hover {
+            cursor: not-allowed;
+          }
+          opacity: 0.5;
         }
       }
     }

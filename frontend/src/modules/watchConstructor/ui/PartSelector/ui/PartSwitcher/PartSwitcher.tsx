@@ -38,7 +38,11 @@ export const PartSwitcher: FC<PartSwitcherProps> = ({
     </div>
   ) : (
     <div className={styles.imageSwitcherContainer}>
-      <ImageCarousel parts={parts} onSelect={onPartClick} />
+      <ImageCarousel
+        parts={parts}
+        onSelect={onPartClick}
+        compatiblePartIds={compatiblePartIds}
+      />
     </div>
   );
 };

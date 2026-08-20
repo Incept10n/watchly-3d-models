@@ -10,14 +10,14 @@ import styles from "./ImageCarousel.module.scss";
 export type ImageCarouselProps = {
   parts: Part[];
   onSelect: (part: Part) => void;
+  compatiblePartIds: number[];
   className?: string;
 };
-
-// TODO: add disabled state
 
 export const ImageCarousel: FC<ImageCarouselProps> = ({
   parts,
   onSelect,
+  compatiblePartIds,
   className,
 }) => {
   const { currentTab, currentWatch } = useWatchConstructor();
@@ -35,8 +35,6 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({
   const handleClickDown = () => {
     const nextPartIndex = chosenIndex + 1 >= parts.length ? 0 : chosenIndex + 1;
 
-    console.log("here");
-
     onSelect(parts[nextPartIndex]);
   };
 
@@ -45,14 +43,17 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({
       <div className={styles.imageContainer}>
         <div
           className={styles.imageOverflowContainer}
-          style={{ top: 150 - 300 * chosenIndex }}
+          style={{ transform: `translateY(${150 - 300 * chosenIndex}px)` }}
         >
           {parts.map((part, index) => (
             <img
               key={index}
               src={part.pictureUrl}
               alt="picture"
-              className={styles.image}
+              className={clsx(styles.image, {
+                [styles.disabled]: !compatiblePartIds.includes(part.id),
+              })}
+              onClick={() => onSelect(part)}
             />
           ))}
         </div>

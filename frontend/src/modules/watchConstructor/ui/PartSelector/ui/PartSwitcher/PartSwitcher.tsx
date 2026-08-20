@@ -4,6 +4,7 @@ import clsx from "clsx";
 
 import styles from "./PartSwitcher.module.scss";
 import { Button } from "@/shared/ui";
+import { ImageCarousel } from "../ImageCarousel";
 
 type PartSwitcherProps = {
   type: "buttons" | "switcher";
@@ -37,22 +38,7 @@ export const PartSwitcher: FC<PartSwitcherProps> = ({
     </div>
   ) : (
     <div className={styles.imageSwitcherContainer}>
-      <div className={styles.imageDisplayContainer}>
-        {parts.map((part) => (
-          <button
-            key={part.id}
-            className={clsx(styles.partImage, {
-              [styles.disabled]: !compatiblePartIds.includes(part.id),
-              [styles.selected]: part.id === selectedId,
-            })}
-            disabled={!compatiblePartIds.includes(part.id)}
-            onClick={() => onPartClick(part)}
-          >
-            {part.name}
-          </button>
-        ))}
-      </div>
-      <div className={styles.controls}></div>
+      <ImageCarousel parts={parts} onSelect={onPartClick} />
     </div>
   );
 };

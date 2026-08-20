@@ -15,48 +15,4 @@
 }
 
 .imageSwitcherContainer {
-  display: flex;
-
-  .imageDisplayContainer {
-    display: flex;
-    flex-direction: column;
-
-    margin-right: 15px;
-
-    .partImage {
-      padding: 20px;
-      border: 1px solid black;
-      border-radius: 7px;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-
-      margin-bottom: 10px;
-
-      background-color: #ffd580;
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      &.disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
-      }
-
-      &.selected {
-        border-width: 3px;
-      }
-    }
-  }
-
-  .controls {
-    width: 20px;
-    height: 100px;
-
-    border: 1px solid black;
-    border-radius: 10px;
-  }
 }

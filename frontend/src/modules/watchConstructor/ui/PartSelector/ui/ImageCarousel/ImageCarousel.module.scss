@@ -1,0 +1,81 @@
+.imageSwitcherContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: relative;
+  width: 350px;
+
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    box-shadow:
+      inset 0 40px 60px -10px white,
+      inset 0 60px 80px -20px white,
+      inset 0 -40px 60px -10px white,
+      inset 0 -60px 80px -20px white;
+    z-index: 1;
+  }
+
+  .imageContainer {
+    height: 700px;
+
+    .imageOverflowContainer {
+      position: absolute;
+
+      .image {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+
+        user-select: none;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .controlls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    padding: 20px 10px;
+
+    border-radius: 15px;
+    box-shadow:
+      inset 0px 2px 4px rgba(0, 0, 0, 0.15),
+      0px 2px 4px rgba(0, 0, 0, 0.15);
+
+    height: 220px;
+
+    z-index: 999;
+
+    .arrow {
+      &:hover {
+        scale: 1.2;
+        cursor: pointer;
+      }
+
+      &.bottom {
+        transform: rotate(180deg);
+      }
+    }
+
+    .line {
+      width: 1px;
+      height: 70%;
+      background-color: black;
+    }
+  }
+}

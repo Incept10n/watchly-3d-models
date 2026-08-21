@@ -5,6 +5,12 @@
 ### Site testing:
 url: https://dev.watchly.inceptech.ru/
 
+### How to run seeder.ts against prod database
+```
+kubectl port-forward postgresql-0 2398:5432 -n watchly-3d-models
+npm run db:seed
+```
+
 ### TODO:
     - make another button style (primary / blue one)
     - do order logic thingy

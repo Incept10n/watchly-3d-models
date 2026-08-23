@@ -4,9 +4,9 @@ import {
   ConstructorContainer,
   ContactsWrapper,
   ImageCarousel,
-  OrderButton,
   PartTabs,
   PhoneIcon,
+  TextPartPicker,
   ThreeDModelDisplayer,
   UserIcon,
 } from "../ui";
@@ -87,12 +87,10 @@ export const WatchConstructorPage = () => {
     >
       <PartTabs className={styles.tabs} />
       <ConstructorContainer className={styles.constructorContainer}>
-        <ImageCarousel />
-        <ThreeDModelDisplayer />
+        <TextPartPicker className={styles.textPicker} />
+        <ImageCarousel className={styles.imageCarousel} />
+        <ThreeDModelDisplayer className={styles.threeDModelDisplayer} />
       </ConstructorContainer>
-      <div className={styles.orderButtonContainer}>
-        <OrderButton />
-      </div>
     </BasePage>
   );
 };

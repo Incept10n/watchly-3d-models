@@ -5,3 +5,8 @@ $font-size-sm: 0.8rem;
 
 // Color
 $color-primary: #0066ff;
+
+// Shadow
+$watchly-inset-shadow:
+  inset 0px 2px 4px rgba(0, 0, 0, 0.15),
+  0px 2px 4px rgba(0, 0, 0, 0.15);

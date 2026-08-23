@@ -1,0 +1,97 @@
+@use "@/shared/styles/variables";
+
+.textTabPickerContainer {
+  width: 20px;
+  height: 600px;
+
+  background-color: #fff;
+
+  padding: 22px 15px;
+
+  box-shadow: variables.$watchly-inset-shadow;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 20px;
+
+  border-radius: 11px;
+
+  transition: width 0.1s ease-in-out;
+
+  overflow: hidden;
+
+  &.expanded {
+    width: 350px;
+
+    .partInfoContainer {
+      justify-content: start;
+
+      padding: 10px 15px;
+
+      .partName {
+        display: block;
+      }
+    }
+  }
+
+  .partInfoContainer {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    &:hover {
+      cursor: pointer;
+
+      background-color: rgba($color: #999, $alpha: 0.1);
+      border-radius: 6px;
+    }
+
+    &.chosen {
+      .partSquare {
+        background-color: #5c74cb;
+      }
+
+      .partName {
+        color: #5c74cb;
+      }
+    }
+
+    &.available {
+      .partSquare {
+        background-color: #000;
+      }
+
+      .partName {
+        color: #000;
+      }
+    }
+
+    &.disabled {
+      &:hover {
+        cursor: not-allowed;
+      }
+
+      .partSquare {
+        background-color: #d9d9d9;
+      }
+
+      .partName {
+        color: #d9d9d9;
+      }
+    }
+
+    .partSquare {
+      width: 18px;
+      height: 18px;
+
+      flex: 0 0 auto;
+    }
+
+    .partName {
+      display: none;
+
+      margin-left: 25px;
+    }
+  }
+}

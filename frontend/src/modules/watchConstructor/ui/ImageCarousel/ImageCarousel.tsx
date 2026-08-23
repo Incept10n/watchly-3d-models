@@ -7,6 +7,7 @@ import { watchConstructorApi } from "../../api/watchConstructorApi";
 // import { ArrowIcon } from "../icons";
 
 import styles from "./ImageCarousel.module.scss";
+import { getAllCompatibleIds } from "../../utils";
 
 export type ImageCarouselProps = {
   className?: string;
@@ -28,9 +29,7 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ className }) => {
     (part) => part.id === currentWatch[currentTab].id,
   );
 
-  const compatiblePartIds = compatability
-    .flatMap((compItem) => compItem.compatableIds)
-    .concat(compatability.map((part) => part.baseId));
+  const compatiblePartIds = getAllCompatibleIds(compatability);
 
   const choosePart = async (part: Part) => {
     const updatedWatch = {

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
 import {
+  ConstructorContainer,
   ContactsWrapper,
+  ImageCarousel,
   OrderButton,
-  PartSelector,
   PartTabs,
   PhoneIcon,
   ThreeDModelDisplayer,
@@ -85,9 +86,10 @@ export const WatchConstructorPage = () => {
       footer={<div></div>}
     >
       <PartTabs className={styles.tabs} />
-      <PartSelector className={styles.leftSelector}>
+      <ConstructorContainer className={styles.constructorContainer}>
+        <ImageCarousel />
         <ThreeDModelDisplayer />
-      </PartSelector>
+      </ConstructorContainer>
       <div className={styles.orderButtonContainer}>
         <OrderButton />
       </div>

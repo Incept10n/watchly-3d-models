@@ -13,9 +13,9 @@ export const ArrowIcon: IconComponent = (props) => {
       <path
         d="M16 8L8.5 1L1 8"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

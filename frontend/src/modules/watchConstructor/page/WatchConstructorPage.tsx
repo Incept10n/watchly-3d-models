@@ -6,6 +6,7 @@ import {
   ImageCarousel,
   PartTabs,
   PhoneIcon,
+  SideFeatures,
   TextPartPicker,
   ThreeDModelDisplayer,
   UserIcon,
@@ -90,6 +91,7 @@ export const WatchConstructorPage = () => {
         <TextPartPicker className={styles.textPicker} />
         <ImageCarousel className={styles.imageCarousel} />
         <ThreeDModelDisplayer className={styles.threeDModelDisplayer} />
+        <SideFeatures></SideFeatures>
       </ConstructorContainer>
     </BasePage>
   );

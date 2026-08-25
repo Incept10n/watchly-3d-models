@@ -35,6 +35,7 @@ model Part {
 
   compatibilitiesAsPart1 PartCompatibility[] @relation("Part1")
   compatibilitiesAsPart2 PartCompatibility[] @relation("Part2")
+  orderItems            OrderItem[]
 }
 
 model PartCompatibility {
@@ -45,4 +46,23 @@ model PartCompatibility {
   part2 Part @relation("Part2", fields: [part2Id], references: [id], onDelete: Cascade)
 
   @@id([part1Id, part2Id])
+}
+
+model Order {
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+
+  items OrderItem[]
+}
+
+model OrderItem {
+  id      Int  @id @default(autoincrement())
+  orderId Int
+  partId  Int
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  part  Part  @relation(fields: [partId], references: [id], onDelete: Cascade)
+
+  @@unique([orderId, partId])
 }

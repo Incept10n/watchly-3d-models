@@ -3,11 +3,28 @@ import clsx from "clsx";
 
 import styles from "./Button.module.scss";
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: "secondary" | "primary";
+};
 
-export const Button: FC<ButtonProps> = ({ className, children, ...props }) => {
+export const Button: FC<ButtonProps> = ({
+  variant = "secondary",
+  className,
+  children,
+  ...props
+}) => {
   return (
-    <button className={clsx(styles.watchlyButton, className)} {...props}>
+    <button
+      className={clsx(
+        styles.button,
+        {
+          [styles.secondary]: variant === "secondary",
+          [styles.primary]: variant === "primary",
+        },
+        className,
+      )}
+      {...props}
+    >
       {children}
     </button>
   );

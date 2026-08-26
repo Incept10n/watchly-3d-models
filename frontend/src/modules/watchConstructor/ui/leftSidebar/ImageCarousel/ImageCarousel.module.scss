@@ -55,36 +55,36 @@
     }
   }
 
-  .controlls {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-
-    padding: 20px 10px;
-
-    border-radius: 15px;
-    box-shadow: variables.$watchly-inset-shadow;
-
-    height: 220px;
-
-    z-index: 999;
-
-    .arrow {
-      &:hover {
-        scale: 1.2;
-        cursor: pointer;
-      }
-
-      &.bottom {
-        transform: rotate(180deg);
-      }
-    }
-
-    .line {
-      width: 1px;
-      height: 70%;
-      background-color: black;
-    }
-  }
+  /* .controlls { */
+  /*   display: flex; */
+  /*   flex-direction: column; */
+  /*   justify-content: space-around; */
+  /*   align-items: center; */
+  /**/
+  /*   padding: 20px 10px; */
+  /**/
+  /*   border-radius: 15px; */
+  /*   box-shadow: variables.$watchly-inset-shadow; */
+  /**/
+  /*   height: 220px; */
+  /**/
+  /*   z-index: 999; */
+  /**/
+  /*   .arrow { */
+  /*     &:hover { */
+  /*       scale: 1.2; */
+  /*       cursor: pointer; */
+  /*     } */
+  /**/
+  /*     &.bottom { */
+  /*       transform: rotate(180deg); */
+  /*     } */
+  /*   } */
+  /**/
+  /*   .line { */
+  /*     width: 1px; */
+  /*     height: 70%; */
+  /*     background-color: black; */
+  /*   } */
+  /* } */
 }

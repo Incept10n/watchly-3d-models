@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { useRef, useEffect, useState } from "react";
 import { PART_TYPES, type PartType } from "@/shared/types";
-import { useWatchConstructor } from "../../store";
 import type { FC } from "react";
+import { useWatchConstructor } from "@/modules/watchConstructor/store";
 
 import styles from "./PartTabs.module.scss";
 

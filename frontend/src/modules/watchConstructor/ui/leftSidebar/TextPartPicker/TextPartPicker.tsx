@@ -1,20 +1,20 @@
 import { useState, type FC } from "react";
 import clsx from "clsx";
 
-import { useWatchConstructor } from "../../store";
 import type { Part } from "@/shared/types";
-import { getAllCompatibleIds } from "../../utils";
-import { watchConstructorApi } from "../../api/watchConstructorApi";
+import { useWatchConstructor } from "@/modules/watchConstructor/store";
+import { getAllCompatibleIds } from "@/modules/watchConstructor/utils";
+import { watchConstructorApi } from "@/modules/watchConstructor/api/watchConstructorApi";
 
 import styles from "./TextPartPicker.module.scss";
 
-export type TextPartPicker = {
+export type TextPartPickerProps = {
   className?: string;
 };
 
 type PartState = "chosen" | "disabled" | "available";
 
-export const TextPartPicker: FC<TextPartPicker> = ({ className }) => {
+export const TextPartPicker: FC<TextPartPickerProps> = ({ className }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const {
     parts,

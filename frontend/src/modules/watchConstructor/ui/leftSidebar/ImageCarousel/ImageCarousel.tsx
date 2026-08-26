@@ -3,11 +3,11 @@ import type { FC } from "react";
 import clsx from "clsx";
 
 import { useWatchConstructor } from "@/modules/watchConstructor/store";
-import { watchConstructorApi } from "../../api/watchConstructorApi";
+import { getAllCompatibleIds } from "@/modules/watchConstructor/utils";
+import { watchConstructorApi } from "@/modules/watchConstructor/api/watchConstructorApi";
 // import { ArrowIcon } from "../icons";
 
 import styles from "./ImageCarousel.module.scss";
-import { getAllCompatibleIds } from "../../utils";
 
 export type ImageCarouselProps = {
   className?: string;

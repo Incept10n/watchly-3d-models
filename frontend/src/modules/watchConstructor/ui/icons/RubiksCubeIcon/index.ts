@@ -1,0 +1,1 @@
+export { RubiksCubeIcon } from "./RubiksCubeIcon";

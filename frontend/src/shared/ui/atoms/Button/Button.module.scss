@@ -1,8 +1,8 @@
-.watchlyButton {
+.button {
   padding: 10px 40px;
   border-radius: 16px;
   max-width: 300px;
-  background-color: transparent;
+
   border: none;
 
   display: flex;
@@ -14,21 +14,46 @@
 
   outline: none;
 
-  box-shadow:
-    inset 0px 2px 4px rgba(0, 0, 0, 0.15),
-    0px 2px 4px rgba(0, 0, 0, 0.15);
+  &.secondary {
+    background-color: transparent;
 
-  &:hover {
     box-shadow:
-      inset 0px 9px 18px rgba(20, 20, 20, 0.2),
+      inset 0px 2px 4px rgba(0, 0, 0, 0.15),
       0px 2px 4px rgba(0, 0, 0, 0.15);
 
-    cursor: pointer;
+    &:hover {
+      box-shadow:
+        inset 0px 9px 18px rgba(20, 20, 20, 0.2),
+        0px 2px 4px rgba(0, 0, 0, 0.15);
+
+      cursor: pointer;
+    }
+
+    &:active {
+      box-shadow:
+        inset 0px 9px 18px rgba(92, 116, 203, 0.25),
+        0px 2px 4px rgba(0, 0, 0, 0.15);
+    }
   }
 
-  &:active {
-    box-shadow:
-      inset 0px 9px 18px rgba(92, 116, 203, 0.25),
-      0px 2px 4px rgba(0, 0, 0, 0.15);
+  &.primary {
+    $primaryColor: #5c74cb;
+
+    background-color: $primaryColor;
+    color: white;
+
+    &:hover {
+      background-color: transparent;
+      border: 1px solid $primaryColor;
+      color: $primaryColor;
+
+      cursor: pointer;
+    }
+
+    &:active {
+      box-shadow:
+        inset 0px 9px 18px rgba($color: $primaryColor, $alpha: 0.35),
+        0px 2px 4px rgba($color: $primaryColor, $alpha: 0.15);
+    }
   }
 }

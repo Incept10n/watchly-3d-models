@@ -12,5 +12,7 @@ npm run db:seed
 ```
 
 ### TODO:
-    - make another button style (primary / blue one)
-    - do order logic thingy
+    - add message icon for last right button for the rigth sidebar
+    - add them (even without implementation)
+    - create modal sequence
+    - finish order button logic

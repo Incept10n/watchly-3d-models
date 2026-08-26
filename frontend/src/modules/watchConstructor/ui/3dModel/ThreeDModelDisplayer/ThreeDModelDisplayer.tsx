@@ -18,8 +18,7 @@ import {
 } from "@react-three/drei";
 
 import { Button } from "@/shared/ui/atoms/Button";
-
-import { useWatchConstructor } from "../../store";
+import { useWatchConstructor } from "@/modules/watchConstructor/store";
 import { PartModel } from "./PartModel";
 
 import styles from "./ThreeDModelDisplayer.module.scss";

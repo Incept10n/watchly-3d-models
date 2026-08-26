@@ -32,8 +32,10 @@ export class DbSeederService {
       },
     });
 
+    const result = { ...part, cost: Number(part.cost) };
+
     if (dto.compatibilityIds.length === 0) {
-      return part;
+      return result;
     }
 
     const compatibilityData = dto.compatibilityIds.map((id) => {
@@ -69,11 +71,11 @@ export class DbSeederService {
       });
     }
 
-    return part;
+    return result;
   }
 
   async getAllParts() {
-    return this.prisma.part.findMany({
+    const parts = await this.prisma.part.findMany({
       orderBy: {
         id: 'asc',
       },
@@ -84,6 +86,8 @@ export class DbSeederService {
         cost: true,
       },
     });
+
+    return parts.map((p) => ({ ...p, cost: Number(p.cost) }));
   }
 
   async getPart(id: number) {
@@ -142,7 +146,7 @@ export class DbSeederService {
       });
     }
 
-    return part;
+    return { ...part, cost: Number(part.cost) };
   }
 
   async deletePart(id: number) {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ChosenWatch, FormDependencyTreeResponse } from './types';
-import { PartType } from 'generated/prisma/client';
+import { Part, PartType } from 'generated/prisma/client';
 
 // compatability dependency table:
 /* cases <|- movement <|- hands
@@ -17,6 +17,11 @@ type CompatabilityPair = {
   compatableIds: number[];
 };
 type CompatabilityArray = CompatabilityPair[];
+
+const withNumberCost = (part: Part) => ({
+  ...part,
+  cost: Number(part.cost),
+});
 
 @Injectable()
 export class WatchService {
@@ -147,7 +152,14 @@ export class WatchService {
       currentTree.MOVEMENT.id,
     ]);
 
-    return { currentTree, compatability };
+    const typedTree = Object.fromEntries(
+      Object.entries(currentTree).map(([key, part]) => [
+        key,
+        withNumberCost(part),
+      ]),
+    ) as unknown as ChosenWatch;
+
+    return { currentTree: typedTree, compatability };
   }
 
   public async getCompatible(partIds: number[]): Promise<CompatabilityArray> {
@@ -178,7 +190,8 @@ export class WatchService {
   }
 
   public async getAll() {
-    return this.prismaService.part.findMany();
+    const parts = await this.prismaService.part.findMany();
+    return parts.map(withNumberCost);
   }
 
   public async getFirstCompatableSequence() {

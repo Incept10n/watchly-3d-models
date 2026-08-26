@@ -1,0 +1,1 @@
+export { RublesIcon } from "./RublesIcon";

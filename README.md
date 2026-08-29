@@ -14,7 +14,6 @@ npm run db:seed
 
 ### TODO:
 1) main todo:
-    - make it so that clients used ui from watchly website
     - tooltips feature (look below)
     - fix links to the social media
 

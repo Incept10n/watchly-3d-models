@@ -2,6 +2,11 @@
 
 Watch customizer: two independent apps (`backend`, `frontend`), each with its own `package.json`/`node_modules`. There is **no root workspace** — run npm commands inside the relevant app dir. Default branch is `master`.
 
+## Docs (`docs/`)
+
+- Per-module/client documentation lives in `docs/*.txt` (e.g. `docs/orders-client.txt`, `docs/db-seeder-client.txt`): functional/non-functional requirements, design decisions, backend endpoints, and frontend module structure.
+- When building or changing a feature/module, read the relevant `docs/*` file first, and keep it in sync with the implementation (update endpoints/module structure, mark TODO items done).
+
 ## Backend (`backend/`) — NestJS 11 + Prisma 7 + Postgres
 
 - Setup order matters (also what the Dockerfile does): `npm install` → `npx prisma generate` → `npm run build` → `npx prisma migrate deploy` before starting.

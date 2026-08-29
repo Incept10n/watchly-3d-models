@@ -7,6 +7,10 @@ Watch customizer: two independent apps (`backend`, `frontend`), each with its ow
 - Per-module/client documentation lives in `docs/*.txt` (e.g. `docs/orders-client.txt`, `docs/db-seeder-client.txt`): functional/non-functional requirements, design decisions, backend endpoints, and frontend module structure.
 - When building or changing a feature/module, read the relevant `docs/*` file first, and keep it in sync with the implementation (update endpoints/module structure, mark TODO items done).
 
+## Shared UI (`frontend/src/shared/ui`)
+
+- Prefer shared UI as much as possible for every feature; when it doesn't fit, suggest a change to the shared UI (new atom/variant/prop) rather than duplicating styles in a module. See `docs/shared-ui.txt`.
+
 ## Backend (`backend/`) — NestJS 11 + Prisma 7 + Postgres
 
 - Setup order matters (also what the Dockerfile does): `npm install` → `npx prisma generate` → `npm run build` → `npx prisma migrate deploy` before starting.

@@ -1,0 +1,126 @@
+.placeholder {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  height: 100%;
+
+  color: #888;
+}
+
+.details {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.uid {
+  font-family: monospace;
+  font-size: 18px;
+
+  font-weight: 600;
+
+  word-break: break-all;
+}
+
+.date {
+  font-size: 13px;
+
+  opacity: 0.7;
+}
+
+.items {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 10px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.image {
+  width: 50px;
+  height: 50px;
+
+  object-fit: cover;
+
+  border-radius: 8px;
+}
+
+.imageFallback {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 8px;
+
+  background: #f0f0f0;
+}
+
+.itemInfo {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  flex: 1;
+}
+
+.itemName {
+  font-weight: 600;
+}
+
+.itemType {
+  font-size: 12px;
+
+  opacity: 0.7;
+}
+
+.itemCost {
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  font-weight: 600;
+}
+
+.total {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #ddd;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.totalValue {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}

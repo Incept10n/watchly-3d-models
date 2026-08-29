@@ -1,10 +1,9 @@
-import { Button } from "@/shared/ui";
+import { Button, RublesIcon } from "@/shared/ui";
 import { useModalStore } from "@/shared/store";
 
 import { useWatchConstructor } from "@/modules/watchConstructor/store";
 import { orderApi } from "@/modules/watchConstructor/api/orderApi";
 import { buildOrderSequence } from "../../orderFlow";
-import { RublesIcon } from "../../icons";
 
 import styles from "./Order.module.scss";
 

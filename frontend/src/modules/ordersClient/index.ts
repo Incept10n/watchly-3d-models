@@ -1,0 +1,1 @@
+export { OrdersClientPage } from "./page";

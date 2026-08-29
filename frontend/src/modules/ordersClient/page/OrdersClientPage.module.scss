@@ -1,0 +1,62 @@
+.page {
+  display: grid;
+
+  grid-template-columns: 380px 1fr;
+
+  height: calc(100vh - 130px);
+}
+
+.sidebar {
+  border-right: 1px solid #ddd;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 0;
+}
+
+.header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 20px;
+
+  border-bottom: 1px solid #ddd;
+}
+
+.filter {
+  margin: 15px;
+
+  padding: 10px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.loading {
+  padding: 12px;
+
+  text-align: center;
+
+  color: #888;
+}
+
+.list {
+  display: flex;
+
+  flex-direction: column;
+
+  flex: 1;
+
+  min-height: 0;
+}
+
+.content {
+  padding: 30px;
+
+  overflow-y: auto;
+}

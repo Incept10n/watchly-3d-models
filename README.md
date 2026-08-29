@@ -1,6 +1,7 @@
 ### How to use current app:
 - go to ```/``` for main ui
 - go to ```/seeder``` for ui, made for seeding
+- go to ```/orders``` for ui, made for viewing orders
 
 ### Site testing:
 url: https://dev.watchly.inceptech.ru/
@@ -13,7 +14,6 @@ npm run db:seed
 
 ### TODO:
 1) main todo:
-    - make client to view all orders
     - make it so that clients used ui from watchly website
     - tooltips feature (look below)
     - fix links to the social media

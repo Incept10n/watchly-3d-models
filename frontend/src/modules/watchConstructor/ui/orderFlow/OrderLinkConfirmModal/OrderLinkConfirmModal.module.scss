@@ -1,0 +1,89 @@
+@use "@/shared/styles/variables";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+
+  gap: 24px;
+
+  .text {
+    margin: 0;
+
+    color: #322f2f;
+    font-size: variables.$font-size-base;
+    line-height: 1.5;
+  }
+
+  .copyableMessage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 2px solid #ccbfbf;
+    border-radius: 10px;
+
+    width: 100%;
+    min-height: 70px;
+
+    padding: 12px 20px;
+
+    gap: 12px;
+
+    .message {
+      flex: 1;
+      min-width: 0;
+
+      word-break: break-word;
+      white-space: normal;
+
+      text-align: left;
+
+      color: #848484;
+    }
+
+    .copyButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      flex-shrink: 0;
+
+      border: none;
+      background-color: transparent;
+
+      cursor: pointer;
+    }
+  }
+
+  .chatLink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 18px 0;
+
+    border: 1px solid transparent;
+    border-radius: 16px;
+
+    background-color: #5c74cb;
+    color: white;
+
+    font-size: 18px;
+    line-height: 1;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: transparent;
+      border-color: #5c74cb;
+      color: #5c74cb;
+    }
+  }
+}

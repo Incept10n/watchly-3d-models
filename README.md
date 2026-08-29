@@ -12,7 +12,19 @@ npm run db:seed
 ```
 
 ### TODO:
-    - add message icon for last right button for the rigth sidebar
-    - add them (even without implementation)
-    - create modal sequence
-    - finish order button logic
+1) main todo:
+    - make client to view all orders
+    - make it so that clients used ui from watchly website
+    - tooltips feature (look below)
+    - fix links to the social media
+
+2) other features to add:
+    - add tooltips for disabled items to say that they are disabed for a reason
+    - need to decide where to setup the logic finding out why certain item is not available and where to construct the message for it
+
+3) optimization problems:
+    - optimized 3d models and images in overall
+    - server different resolution files for different kinds of screens (mobile, labtop, pc)
+
+4) refactor ideas:
+    - maybe put modal manager into a srs/services folder and export needed stuff from there

@@ -63,7 +63,7 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ className }) => {
       <div className={styles.imageContainer}>
         <div
           className={styles.imageOverflowContainer}
-          style={{ transform: `translateY(${150 - 300 * chosenIndex}px)` }}
+          style={{ transform: `translateY(${125 - 250 * chosenIndex}px)` }}
         >
           {tabParts.map((part, index) => (
             <img

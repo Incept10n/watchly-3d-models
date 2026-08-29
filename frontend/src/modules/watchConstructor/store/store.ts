@@ -14,11 +14,14 @@ export const useWatchConstructor = create<
   compatability: [],
   currentTab: "CASE",
   currentWatch: {} as ChosenWatch,
+  communicationChannel: null,
 
   setTab: (tab) => set(() => ({ currentTab: tab })),
   setParts: (parts) => set(() => ({ parts })),
   setCompatability: (compatability: CompatabilityArray) =>
     set(() => ({ compatability })),
+  setCommunicationChannel: (communicationChannel) =>
+    set(() => ({ communicationChannel })),
   changeCurrentWatch: (nextCurrentWatch) =>
     set((state) => ({
       currentWatch: {

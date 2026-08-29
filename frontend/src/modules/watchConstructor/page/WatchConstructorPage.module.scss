@@ -4,6 +4,19 @@
   margin-bottom: 40px;
 }
 
+.contactButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  background-color: transparent;
+
+  padding: 0;
+
+  cursor: pointer;
+}
+
 .constructorContainer {
   margin: 0px 70px;
   position: relative;

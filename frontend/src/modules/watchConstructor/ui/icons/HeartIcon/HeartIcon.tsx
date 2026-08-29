@@ -1,4 +1,6 @@
-export const HeartIcon = () => {
+import type { IconComponent } from "@/shared/types";
+
+export const HeartIcon: IconComponent = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

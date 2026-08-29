@@ -1,0 +1,9 @@
+.leftSidebarWrapper {
+  position: relative;
+
+  width: 340px;
+
+  @media (max-width: 1270px) {
+    width: 50px;
+  }
+}

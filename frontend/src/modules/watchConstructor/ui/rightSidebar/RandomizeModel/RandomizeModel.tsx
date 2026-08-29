@@ -1,9 +1,15 @@
-import { Button } from "@/shared/ui";
+import { RubiksCubeIcon } from "../../icons";
+import { AdditionalActionButton } from "../AdditionalActionButton";
 
 export const RandomizeModel = () => {
+  const randomizeModel = () => {
+    console.log("dummy randomizing model");
+  };
+
   return (
-    <Button>
-      <div></div>
-    </Button>
+    <AdditionalActionButton onClick={randomizeModel}>
+      <div>Перемешать модель</div>
+      <RubiksCubeIcon />
+    </AdditionalActionButton>
   );
 };

@@ -4,3 +4,4 @@ export { ArrowIcon } from "./ArrowIcon";
 export { RublesIcon } from "./RublesIcon";
 export { RubiksCubeIcon } from "./RubiksCubeIcon";
 export { HeartIcon } from "./HeartIcon";
+export { MessageIcon } from "./MessageIcon";

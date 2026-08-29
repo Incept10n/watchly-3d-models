@@ -3,10 +3,14 @@ import { useEffect, useState } from "react";
 import {
   ConstructorContainer,
   ContactsWrapper,
+  FavouritesButton,
   ImageCarousel,
+  LeftSidebarWrapper,
+  MakeCutomButton,
   Order,
   PartTabs,
   PhoneIcon,
+  RandomizeModel,
   Separator,
   SideFeatures,
   TextPartPicker,
@@ -90,12 +94,17 @@ export const WatchConstructorPage = () => {
     >
       <PartTabs className={styles.tabs} />
       <ConstructorContainer className={styles.constructorContainer}>
-        <TextPartPicker className={styles.textPicker} />
-        <ImageCarousel className={styles.imageCarousel} />
+        <LeftSidebarWrapper>
+          <TextPartPicker className={styles.textPicker} />
+          <ImageCarousel className={styles.imageCarousel} />
+        </LeftSidebarWrapper>
         <ThreeDModelDisplayer className={styles.threeDModelDisplayer} />
         <SideFeatures>
           <Order />
           <Separator />
+          <RandomizeModel />
+          <FavouritesButton />
+          <MakeCutomButton />
         </SideFeatures>
       </ConstructorContainer>
     </BasePage>

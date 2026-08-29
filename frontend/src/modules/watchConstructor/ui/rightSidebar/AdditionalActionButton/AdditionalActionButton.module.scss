@@ -1,0 +1,27 @@
+.additionalActionButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 5px 20px;
+
+  width: 100%;
+  min-height: 50px;
+
+  text-align: left;
+
+  div {
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
+    white-space: normal;
+  }
+
+  svg {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+    margin-left: 10px;
+  }
+}

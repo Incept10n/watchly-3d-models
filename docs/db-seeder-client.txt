@@ -1,0 +1,50 @@
+### functional requirements:
+- as a user i want to view all parts
+- as a user i want to select needed part
+- as a user i want to create a new part
+- as a user i want to edit an existing part
+- as a user i want to delete an existing part (with confirmation)
+- as a user i want to configure the compatibility of a part
+
+### non functional requirements:
+- for frontend use shared ui like primary button for actions and also layouts
+- the display of parts should be as a small card list for better preview, user can click on each card and when he does it shows the whole editing form in the convenient place
+
+### design decisions (made during implementation):
+- layout: two-pane - parts list on the left sidebar, selected part editor in the right panel (like `OrdersClientPage`)
+- module name: `dbSeeder` (existing), route `/seeder`
+- shared ui in use: `BasePage` + `Header` + `WatchlyLogo` shell (like `WatchConstructorPage` / `OrdersClientPage`), `Button` (primary) for Add and Save actions, `Heading` for section titles, `RublesIcon` for all cost displays (was `$` before)
+- editing and creation share one `PartForm` component: a form is shown for the selected part, or an empty form when creating; the "Add" button resets to create mode
+- delete action is only available for a selected (existing) part and is gated behind a confirmation `Modal` (via shared `useModalStore.pushModal` + `ModalHost`), rendered by the new `DeletePartConfirmModal` component
+- compatibility is per type: `CASE` requires none, the rest select from `GET /db-seeder/compatible-options/:type` (checkboxes)
+
+#### backend endpoints (existing `db-seeder` module):
+- `GET /db-seeder/parts` -> `Part[]`
+- `GET /db-seeder/part/:id` -> `PartDetailsDto`
+- `POST /db-seeder/part` (create, body = `SeedPartDto`)
+- `PUT /db-seeder/part/:id` (update, body = `SeedPartDto`)
+- `DELETE /db-seeder/part/:id` -> `{ success: boolean }`
+- `GET /db-seeder/compatible-options/:type` -> `{ id, name }[]`
+
+#### frontend module structure (`frontend/src/modules/dbSeeder`):
+```
+ api
+  dbSeederApi.ts   (getAllParts, getPart, createPart, updatePart, deletePart, getCompatibleOptions)
+  dto.ts           (SeedPartDto, PartDetailsDto)
+ components
+  DeletePartConfirmModal
+  CompatabilitySelector
+  PartCard
+  PartForm
+  PartList
+ page
+  DbSeederPage.tsx + .module.scss
+index.ts
+```
+
+TODO:
+- backend
+    * add new endpoints so that all functional requirements can be done -- done
+- frontend
+    * rewrite the db-seeder client to use shared ui (BasePage/Header/Button/Heading/RublesIcon/Modal) -- done
+    * add delete confirmation modal -- done

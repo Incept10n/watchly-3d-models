@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 
 import { dbSeederApi } from "../api/dbSeederApi";
 import type { PartDetailsDto, SeedPartDto } from "../api/dto";
-import { PartList } from "../components/PartList";
+import { DeletePartConfirmModal } from "../components/DeletePartConfirmModal";
 import { PartForm } from "../components/PartForm";
+import { PartList } from "../components/PartList";
+import { useModalStore } from "@/shared/store";
 import type { Part } from "@/shared/types";
+import { BasePage, Button, Header, Heading, WatchlyLogo } from "@/shared/ui";
 
 import styles from "./DbSeederPage.module.scss";
 
@@ -17,6 +20,8 @@ export function DbSeederPage() {
 
   const [loading, setLoading] = useState(false);
 
+  const pushModal = useModalStore((state) => state.pushModal);
+
   async function loadParts() {
     const data = await dbSeederApi.getAllParts();
 
@@ -24,7 +29,15 @@ export function DbSeederPage() {
   }
 
   useEffect(() => {
-    loadParts();
+    let cancelled = false;
+
+    dbSeederApi.getAllParts().then((data) => {
+      if (!cancelled) setParts(data);
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   async function selectPart(id: number) {
@@ -63,45 +76,66 @@ export function DbSeederPage() {
     await loadParts();
   }
 
+  function confirmDelete() {
+    if (!selectedPart) return;
+
+    pushModal({
+      id: "delete-part-confirm",
+      content: (
+        <DeletePartConfirmModal
+          partName={selectedPart.name}
+          onConfirm={deletePart}
+        />
+      ),
+    });
+  }
+
   return (
-    <div className={styles.page}>
-      <aside className={styles.sidebar}>
-        <div className={styles.header}>
-          <h2>Parts</h2>
-
-          <button onClick={createNew}>+ Add</button>
-        </div>
-
-        <PartList
-          parts={parts}
-
-          onSelect={selectPart}
+    <BasePage
+      header={
+        <Header
+          headerName="DB Seeder"
+          leftIcon={<WatchlyLogo width={50} height={50} />}
+          rightInfo={<div />}
         />
-      </aside>
+      }
+      footer={<div />}
+    >
+      <div className={styles.page}>
+        <aside className={styles.sidebar}>
+          <div className={styles.header}>
+            <Heading>Parts</Heading>
 
-      <main className={styles.content}>
-        <div className={styles.title}>
-          {selectedPart ? "Edit Part" : "Create Part"}
-        </div>
+            <Button variant="primary" onClick={createNew}>
+              Add
+            </Button>
+          </div>
 
-        <PartForm
-          part={selectedPart}
+          <PartList parts={parts} onSelect={selectPart} />
+        </aside>
 
-          onSave={savePart}
-        />
+        <main className={styles.content}>
+          <div className={styles.title}>
+            {selectedPart ? "Edit Part" : "Create Part"}
+          </div>
 
-        {selectedPart && (
-          <button
-            className={styles.delete}
+<PartForm
+            key={selectedPart?.id ?? "new"}
 
-            onClick={deletePart}
-          >
-            Delete Part
-          </button>
-        )}
+            part={selectedPart}
 
-        {loading && <div>Saving...</div>}
-      </main>
-    </div>
+            onSave={savePart}
+          />
+
+          {selectedPart && (
+            <Button variant="primary" className={styles.delete} onClick={confirmDelete}>
+              Delete Part
+            </Button>
+          )}
+
+          {loading && <div className={styles.saving}>Saving...</div>}
+        </main>
+      </div>
+    </BasePage>
   );
 }

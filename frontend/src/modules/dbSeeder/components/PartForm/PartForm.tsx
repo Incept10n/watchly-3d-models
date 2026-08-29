@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import type { PartType } from "@/shared/types";
+import { Button } from "@/shared/ui";
 
 import type { PartDetailsDto, SeedPartDto } from "../../api/dto";
 import { CompatabilitySelector } from "../CompatabilitySelector";
@@ -28,15 +29,9 @@ const emptyForm: SeedPartDto = {
 };
 
 export function PartForm({ part, onSave }: Props) {
-  const [form, setForm] = useState<SeedPartDto>(emptyForm);
-
-  useEffect(() => {
-    if (part) {
-      setForm(part);
-    } else {
-      setForm(emptyForm);
-    }
-  }, [part]);
+  const [form, setForm] = useState<SeedPartDto>(() =>
+    part ? { ...part } : { ...emptyForm },
+  );
 
   function update<K extends keyof SeedPartDto>(key: K, value: SeedPartDto[K]) {
     setForm((prev) => ({
@@ -111,7 +106,9 @@ export function PartForm({ part, onSave }: Props) {
         onChange={(ids) => update("compatibilityIds", ids)}
       />
 
-      <button>Save</button>
+      <Button variant="primary" type="submit">
+        Save
+      </Button>
     </form>
   );
 }

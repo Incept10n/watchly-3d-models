@@ -1,9 +1,9 @@
 .page {
   display: grid;
 
-  grid-template-columns: 350px 1fr;
+  grid-template-columns: 380px 1fr;
 
-  height: 100vh;
+  height: calc(100vh - 130px);
 }
 
 .sidebar {
@@ -12,6 +12,8 @@
   display: flex;
 
   flex-direction: column;
+
+  min-height: 0;
 }
 
 .header {
@@ -41,13 +43,18 @@
 .delete {
   margin-top: 20px;
 
-  padding: 10px;
+  background: #c0392b !important;
+  color: white !important;
 
-  background: #c0392b;
+  &:hover {
+    background: #c0392b !important;
+    border-color: #c0392b !important;
+    color: white !important;
+  }
+}
 
-  color: white;
+.saving {
+  margin-top: 12px;
 
-  border: none;
-
-  cursor: pointer;
+  color: #888;
 }

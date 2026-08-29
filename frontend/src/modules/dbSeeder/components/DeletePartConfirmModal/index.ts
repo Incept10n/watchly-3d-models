@@ -1,0 +1,1 @@
+export { DeletePartConfirmModal } from "./DeletePartConfirmModal";

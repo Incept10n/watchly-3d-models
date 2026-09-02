@@ -2,11 +2,13 @@ import type { FC, ReactNode } from "react";
 import { createPortal } from "react-dom";
 import clsx from "clsx";
 
+import type { TooltipPosition } from "./types";
+
 import styles from "./Tooltip.module.scss";
 
 export type TooltipProps = {
   children: ReactNode;
-  position: { x: number; y: number };
+  position: TooltipPosition;
   className?: string;
 };
 

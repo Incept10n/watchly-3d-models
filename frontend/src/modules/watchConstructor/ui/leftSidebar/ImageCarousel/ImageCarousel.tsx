@@ -8,7 +8,7 @@ import {
   getPartConflictInfo,
   getTooltipText,
 } from "@/modules/watchConstructor/utils";
-import { HoverTooltip } from "@/shared/ui";
+import { HoverTooltip, Tooltip } from "@/shared/ui";
 import { watchConstructorApi } from "@/modules/watchConstructor/api/watchConstructorApi";
 // import { ArrowIcon } from "../icons";
 
@@ -66,11 +66,21 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ className }) => {
   const renderPartImage = (part: Part, index: number) => {
     const isDisabled = !compatiblePartIds.includes(part.id);
     const conflictInfo = getPartConflictInfo(part, currentWatch, compatability);
-    const content =
-      isDisabled && conflictInfo ? getTooltipText(conflictInfo) : null;
+
+    const tooltip =
+      isDisabled && conflictInfo ? (
+        <Tooltip position={{ x: 0, y: 0 }}>
+          {getTooltipText(conflictInfo)}
+        </Tooltip>
+      ) : (
+        <Tooltip className={styles.infoTooltip} position={{ x: 0, y: 0 }}>
+          <div className={styles.infoTitle}>{part.name}</div>
+          {part.description}
+        </Tooltip>
+      );
 
     return (
-      <HoverTooltip key={index} content={content} position="left">
+      <HoverTooltip key={index} tooltip={tooltip} position="left">
         <img
           src={part.pictureUrl}
           alt="picture"

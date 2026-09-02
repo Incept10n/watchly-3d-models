@@ -1,32 +1,32 @@
 import {
+  cloneElement,
   useState,
   type FC,
   type MouseEvent,
   type ReactElement,
-  type ReactNode,
 } from "react";
 
-import { Tooltip } from "./Tooltip";
+import type { PositionAwareTooltipProps, TooltipPosition } from "./types";
 
 const TOOLTIP_WIDTH = 300;
 const TOOLTIP_HEIGHT = 80;
-const TOOLTIP_OFFSET = 12;
+const TOOLTIP_OFFSET = 16;
 
 export type HoverTooltipProps = {
   children: ReactElement;
-  content: ReactNode;
+  tooltip: ReactElement<PositionAwareTooltipProps>;
   position?: "right" | "left";
   wrapperClassName?: string;
 };
 
 export const HoverTooltip: FC<HoverTooltipProps> = ({
   children,
-  content,
+  tooltip,
   position = "right",
   wrapperClassName,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [cursor, setCursor] = useState({ x: 0, y: 0 });
+  const [cursor, setCursor] = useState<TooltipPosition>({ x: 0, y: 0 });
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
@@ -63,7 +63,7 @@ export const HoverTooltip: FC<HoverTooltipProps> = ({
       onMouseMove={handleMouseMove}
     >
       {children}
-      {isHovered && content && <Tooltip position={{ x, y }}>{content}</Tooltip>}
+      {isHovered && cloneElement(tooltip, { position: { x, y } })}
     </div>
   );
 };

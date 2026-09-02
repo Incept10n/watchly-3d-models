@@ -3,7 +3,12 @@ import type { FC } from "react";
 import clsx from "clsx";
 
 import { useWatchConstructor } from "@/modules/watchConstructor/store";
-import { getAllCompatibleIds } from "@/modules/watchConstructor/utils";
+import {
+  getAllCompatibleIds,
+  getPartConflictInfo,
+  getTooltipText,
+} from "@/modules/watchConstructor/utils";
+import { HoverTooltip } from "@/shared/ui";
 import { watchConstructorApi } from "@/modules/watchConstructor/api/watchConstructorApi";
 // import { ArrowIcon } from "../icons";
 
@@ -65,17 +70,30 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ className }) => {
           className={styles.imageOverflowContainer}
           style={{ transform: `translateY(${125 - 250 * chosenIndex}px)` }}
         >
-          {tabParts.map((part, index) => (
-            <img
-              key={index}
-              src={part.pictureUrl}
-              alt="picture"
-              className={clsx(styles.image, {
-                [styles.disabled]: !compatiblePartIds.includes(part.id),
-              })}
-              onClick={() => choosePart(part)}
-            />
-          ))}
+          {tabParts.map((part, index) => {
+            const isDisabled = !compatiblePartIds.includes(part.id);
+            const conflictInfo = getPartConflictInfo(
+              part,
+              currentWatch,
+              compatability,
+            );
+
+            const content =
+              isDisabled && conflictInfo ? getTooltipText(conflictInfo) : null;
+
+            return (
+              <HoverTooltip key={index} content={content} position="left">
+                <img
+                  src={part.pictureUrl}
+                  alt="picture"
+                  className={clsx(styles.image, {
+                    [styles.disabled]: isDisabled,
+                  })}
+                  onClick={() => choosePart(part)}
+                />
+              </HoverTooltip>
+            );
+          })}
         </div>
       </div>
 

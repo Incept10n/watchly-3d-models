@@ -1,20 +1,36 @@
-toltips feature:
+# tooltips feature
 
-reason: when item is not available it's a good idea to explain to the customer the reason for why a certain part is available.
+reason: when an item is not available it's a good idea to explain to the customer the reason why a certain part is unavailable.
 
-user stories:
-- as a user i want to see tooltips when i cannot choose the element (i understand this by either trying to pick the item which is no available or hover upon the item which is not available, where item is a part which is not available)
+## status: implemented (frontend)
 
-non-function requirements:
-- this should be the done similarly to the 'modals' feature in the project so that tooltips can be used everywhere any time.
-- use styles similar to the ones that are already used, but so that tooltips look good
+## user stories
+- as a user i want to see tooltips when i cannot choose the element (i understand this by either trying to pick the item which is not available or hovering upon the item which is not available, where item is a part which is not available)
 
-functional requirements:
-- tooltips must appear when hovering unavailable watch part
-- proper position must be calculated so that it doesn't overflow the screen
+## non-functional requirements
+- done similarly to the 'modals' feature in the project (shared ui) so tooltips can be used everywhere any time
+- use styles similar to the ones already used, but so that tooltips look good
 
-==== regarding part's tooltips
+## functional requirements
+- tooltips must appear when hovering an unavailable watch part
+- proper position must be calculated so it doesn't overflow the screen (right/left + bottom/top flip via viewport detection)
 
-when user hovers on the part which is unavailable, the text should say
-copywriting:
-'Эта часть недоступна для выбора, так как она не совместима с выбранным <part type, expample "механизмом"> <..name of the part..>, если хотите её использовать, то выбирите другой <part type>, совместимый с этой частью'
+## implementation
+- `shared/constants/partTypeNames.ts` — `PART_TYPE_NAMES` (Russian names for every `PartType` in nominative + instrumental case)
+- `shared/ui/atoms/Tooltip` —
+    - `Tooltip.tsx` — bare positional tooltip (portaled to `document.body`, `position: fixed`, `pointer-events: none`)
+    - `HoverTooltip.tsx` — hover wrapper (tracks cursor, renders `<Tooltip>`, full edge detection)
+- `modules/watchConstructor/utils/partConflict.ts` — `getPartConflictInfo` (walks the fixed 2-level tree: MOVEMENT/BEZEL -> CASE, HANDS/ROTOR/DIAL/CRYSTAL -> MOVEMENT) + `getTooltipText`
+- used in `TextPartPicker` (position "right", wrapper `display: contents`) and `ImageCarousel` (position "left")
+
+## copywriting
+when the user hovers on an unavailable part, the tooltip says:
+`Эта часть несовместима с выбранным <part type, instrumental> «<name of the chosen conflicting part>». Чтобы использовать её, выберите другой <part type, instrumental>, совместимый с этой частью.`
+
+two required things are always present:
+1. tells the user the part is not compatible with another chosen part
+2. displays the name of that conflicting chosen part
+
+## TODO
+- (optional) reuse `PART_TYPE_NAMES` in `PartTabs` instead of its local `PartTypeToRussianName` map
+- generalize conflict detection when the backend dependency tree is generalized (currently hardcoded to the fixed 2-level tree)

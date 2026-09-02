@@ -21,6 +21,10 @@
 
   overflow: hidden;
 
+  .tooltipWrapper {
+    display: contents;
+  }
+
   &.expanded {
     width: 350px;
 

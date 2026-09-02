@@ -16,6 +16,7 @@ npm run db:seed
 1) main todo:
     - tooltips feature (look below)
     - add description tooltip (descriptions to parts i mean)
+    - completely hide the image carousel (so that it doesn't fetch images from the backend)
     - fix links to the social media
     - footer with real links to the legal stuff (already written)
 
@@ -25,9 +26,10 @@ npm run db:seed
         * need to decide where to setup the logic finding out why certain item is not available and where to construct the message for it
 
 3) optimization problems:
+    - look at siyuan
     - disable loading images for image carousel for small screens because
     - optimized 3d models and images in overall
     - server different resolution files for different kinds of screens (mobile, labtop, pc)
 
 4) refactor ideas:
-    - maybe put modal manager into a srs/services folder and export needed stuff from there
+    - maybe put modal manager and tooltips into a srs/services or srs/lib folder and export needed stuff from there

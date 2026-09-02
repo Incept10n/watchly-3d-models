@@ -2,8 +2,13 @@ import { useState, type FC } from "react";
 import clsx from "clsx";
 
 import type { Part } from "@/shared/types";
+import { HoverTooltip } from "@/shared/ui";
 import { useWatchConstructor } from "@/modules/watchConstructor/store";
-import { getAllCompatibleIds } from "@/modules/watchConstructor/utils";
+import {
+  getAllCompatibleIds,
+  getPartConflictInfo,
+  getTooltipText,
+} from "@/modules/watchConstructor/utils";
 import { watchConstructorApi } from "@/modules/watchConstructor/api/watchConstructorApi";
 
 import styles from "./TextPartPicker.module.scss";
@@ -66,16 +71,36 @@ export const TextPartPicker: FC<TextPartPickerProps> = ({ className }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {tabParts.map((part) => (
-        <div
-          key={part.id}
-          className={clsx(styles.partInfoContainer, styles[getPartState(part)])}
-          onClick={() => handleChoosePart(part)}
-        >
-          <div className={clsx(styles.partSquare)} />
-          <div className={styles.partName}>{part.name}</div>
-        </div>
-      ))}
+      {tabParts.map((part) => {
+        const partState = getPartState(part);
+        const conflictInfo = getPartConflictInfo(
+          part,
+          currentWatch,
+          compatability,
+        );
+
+        const content =
+          partState === "disabled" && conflictInfo
+            ? getTooltipText(conflictInfo)
+            : null;
+
+        return (
+          <HoverTooltip
+            key={part.id}
+            content={content}
+            position="right"
+            wrapperClassName={styles.tooltipWrapper}
+          >
+            <div
+              className={clsx(styles.partInfoContainer, styles[partState])}
+              onClick={() => handleChoosePart(part)}
+            >
+              <div className={clsx(styles.partSquare)} />
+              <div className={styles.partName}>{part.name}</div>
+            </div>
+          </HoverTooltip>
+        );
+      })}
     </div>
   );
 };

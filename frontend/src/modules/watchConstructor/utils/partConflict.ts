@@ -43,5 +43,5 @@ export const getPartConflictInfo = (
 export const getTooltipText = (conflict: PartConflictInfo): string => {
   const { partTypeName, partName } = conflict;
 
-  return `Эта часть несовместима с выбранным ${partTypeName} «${partName}». Чтобы использовать её, выберите другой ${partTypeName}, совместимый с этой частью.`;
+  return `Эта часть несовместима с ${partTypeName} «${partName}». Чтобы использовать её, выберите другой ${partTypeName}, совместимый с этой частью.`;
 };

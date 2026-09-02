@@ -63,6 +63,26 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ className }) => {
   //   await choosePart(tabParts[nextPartIndex]);
   // };
 
+  const renderPartImage = (part: Part, index: number) => {
+    const isDisabled = !compatiblePartIds.includes(part.id);
+    const conflictInfo = getPartConflictInfo(part, currentWatch, compatability);
+    const content =
+      isDisabled && conflictInfo ? getTooltipText(conflictInfo) : null;
+
+    return (
+      <HoverTooltip key={index} content={content} position="left">
+        <img
+          src={part.pictureUrl}
+          alt="picture"
+          className={clsx(styles.image, {
+            [styles.disabled]: isDisabled,
+          })}
+          onClick={() => choosePart(part)}
+        />
+      </HoverTooltip>
+    );
+  };
+
   return (
     <div className={clsx(styles.imageSwitcherContainer, className)}>
       <div className={styles.imageContainer}>
@@ -70,30 +90,7 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ className }) => {
           className={styles.imageOverflowContainer}
           style={{ transform: `translateY(${125 - 250 * chosenIndex}px)` }}
         >
-          {tabParts.map((part, index) => {
-            const isDisabled = !compatiblePartIds.includes(part.id);
-            const conflictInfo = getPartConflictInfo(
-              part,
-              currentWatch,
-              compatability,
-            );
-
-            const content =
-              isDisabled && conflictInfo ? getTooltipText(conflictInfo) : null;
-
-            return (
-              <HoverTooltip key={index} content={content} position="left">
-                <img
-                  src={part.pictureUrl}
-                  alt="picture"
-                  className={clsx(styles.image, {
-                    [styles.disabled]: isDisabled,
-                  })}
-                  onClick={() => choosePart(part)}
-                />
-              </HoverTooltip>
-            );
-          })}
+          {tabParts.map(renderPartImage)}
         </div>
       </div>
 

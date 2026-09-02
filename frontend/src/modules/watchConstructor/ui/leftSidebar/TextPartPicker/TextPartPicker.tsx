@@ -61,6 +61,30 @@ export const TextPartPicker: FC<TextPartPickerProps> = ({ className }) => {
     setCompatability(dependencyTree.compatability);
   };
 
+  const renderPartRow = (part: Part) => {
+    const partState = getPartState(part);
+    const conflictInfo = getPartConflictInfo(part, currentWatch, compatability);
+    const content =
+      partState === "disabled" && conflictInfo ? getTooltipText(conflictInfo) : null;
+
+    return (
+      <HoverTooltip
+        key={part.id}
+        content={content}
+        position="right"
+        wrapperClassName={styles.tooltipWrapper}
+      >
+        <div
+          className={clsx(styles.partInfoContainer, styles[partState])}
+          onClick={() => handleChoosePart(part)}
+        >
+          <div className={clsx(styles.partSquare)} />
+          <div className={styles.partName}>{part.name}</div>
+        </div>
+      </HoverTooltip>
+    );
+  };
+
   return (
     <div
       className={clsx(
@@ -71,36 +95,7 @@ export const TextPartPicker: FC<TextPartPickerProps> = ({ className }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {tabParts.map((part) => {
-        const partState = getPartState(part);
-        const conflictInfo = getPartConflictInfo(
-          part,
-          currentWatch,
-          compatability,
-        );
-
-        const content =
-          partState === "disabled" && conflictInfo
-            ? getTooltipText(conflictInfo)
-            : null;
-
-        return (
-          <HoverTooltip
-            key={part.id}
-            content={content}
-            position="right"
-            wrapperClassName={styles.tooltipWrapper}
-          >
-            <div
-              className={clsx(styles.partInfoContainer, styles[partState])}
-              onClick={() => handleChoosePart(part)}
-            >
-              <div className={clsx(styles.partSquare)} />
-              <div className={styles.partName}>{part.name}</div>
-            </div>
-          </HoverTooltip>
-        );
-      })}
+      {tabParts.map(renderPartRow)}
     </div>
   );
 };

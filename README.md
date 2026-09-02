@@ -15,13 +15,17 @@ npm run db:seed
 ### TODO:
 1) main todo:
     - tooltips feature (look below)
+    - add description tooltip (descriptions to parts i mean)
     - fix links to the social media
+    - footer with real links to the legal stuff (already written)
 
 2) other features to add:
-    - add tooltips for disabled items to say that they are disabed for a reason
-    - need to decide where to setup the logic finding out why certain item is not available and where to construct the message for it
+    - tooltips:
+        * add tooltips for disabled items to say that they are disabed for a reason
+        * need to decide where to setup the logic finding out why certain item is not available and where to construct the message for it
 
 3) optimization problems:
+    - disable loading images for image carousel for small screens because
     - optimized 3d models and images in overall
     - server different resolution files for different kinds of screens (mobile, labtop, pc)
 

@@ -58,48 +58,4 @@
       }
     }
   }
-
-  /* .controlls { */
-  /*   display: flex; */
-  /*   flex-direction: column; */
-  /*   justify-content: space-around; */
-  /*   align-items: center; */
-  /**/
-  /*   padding: 20px 10px; */
-  /**/
-  /*   border-radius: 15px; */
-  /*   box-shadow: variables.$watchly-inset-shadow; */
-  /**/
-  /*   height: 220px; */
-  /**/
-  /*   z-index: 999; */
-  /**/
-  /*   .arrow { */
-  /*     &:hover { */
-  /*       scale: 1.2; */
-  /*       cursor: pointer; */
-  /*     } */
-  /**/
-  /*     &.bottom { */
-  /*       transform: rotate(180deg); */
-  /*     } */
-  /*   } */
-  /**/
-  /*   .line { */
-  /*     width: 1px; */
-  /*     height: 70%; */
-  /*     background-color: black; */
-  /*   } */
-  /* } */
-}
-
-.infoTooltip {
-  border: 1px solid #cfe0f6 !important;
-  background-color: #eef4fd !important;
-  color: #2c3e5b !important;
-}
-
-.infoTitle {
-  font-weight: 600;
-  margin-bottom: 4px;
 }

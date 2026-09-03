@@ -18,10 +18,22 @@ reason: when an item is not available it's a good idea to explain to the custome
 ## implementation
 - `shared/constants/partTypeNames.ts` — `PART_TYPE_NAMES` (Russian names for every `PartType` in nominative + instrumental case)
 - `shared/ui/atoms/Tooltip` —
-    - `Tooltip.tsx` — bare positional tooltip (portaled to `document.body`, `position: fixed`, `pointer-events: none`)
-    - `HoverTooltip.tsx` — hover wrapper (tracks cursor, renders `<Tooltip>`, full edge detection)
+    - `Tooltip.tsx` — bare positional tooltip (portaled to `document.body`, `position: fixed`, `pointer-events: none`); exposes `TooltipPosition`
+    - `HoverTooltip.tsx` — hover wrapper (tracks cursor, `cloneElement`s the caller-injected tooltip with the current `position`, full edge detection)
 - `modules/watchConstructor/utils/partConflict.ts` — `getPartConflictInfo` (walks the fixed 2-level tree: MOVEMENT/BEZEL -> CASE, HANDS/ROTOR/DIAL/CRYSTAL -> MOVEMENT) + `getTooltipText`
 - used in `TextPartPicker` (position "right", wrapper `display: contents`) and `ImageCarousel` (position "left")
+
+## how tooltips are composed
+`HoverTooltip` does NOT know what a tooltip looks like. The caller injects the full tooltip element via the
+typed `tooltip` prop (typed as `ReactElement<{ children, position }>` so it is forced to accept `children` +
+`position`). `HoverTooltip` injects the live cursor `position` into it via `cloneElement` and shows it on hover.
+The caller controls styling (e.g. a `className` on the shared `Tooltip`). The shared `Tooltip` is just the
+position-aware primitive; any component accepting `children + position` can be injected instead.
+
+Part items show two different tooltips:
+- **disabled part** -> warning tooltip `<Tooltip>` with the incompatibility text (white bg)
+- **available/chosen part** -> description tooltip `<Tooltip className={...infoTooltip}>` with `part.description`
+  (tinted bg styled in the module, overriding via `!important` per the shared-UI Button-override convention)
 
 ## copywriting
 when the user hovers on an unavailable part, the tooltip says:

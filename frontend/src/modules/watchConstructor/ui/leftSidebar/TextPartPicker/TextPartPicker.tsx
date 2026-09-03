@@ -2,7 +2,7 @@ import { useState, type FC } from "react";
 import clsx from "clsx";
 
 import type { Part } from "@/shared/types";
-import { HoverTooltip, Tooltip } from "@/shared/ui";
+import { HoverTooltip, InfoTooltip, Tooltip } from "@/shared/ui";
 import { useWatchConstructor } from "@/modules/watchConstructor/store";
 import {
   getAllCompatibleIds,
@@ -72,10 +72,9 @@ export const TextPartPicker: FC<TextPartPickerProps> = ({ className }) => {
           {getTooltipText(conflictInfo)}
         </Tooltip>
       ) : (
-        <Tooltip className={styles.infoTooltip} position={{ x: 0, y: 0 }}>
-          <div className={styles.infoTitle}>{part.name}</div>
+        <InfoTooltip position={{ x: 0, y: 0 }} title={part.name}>
           {part.description}
-        </Tooltip>
+        </InfoTooltip>
       );
 
     return (

@@ -8,9 +8,8 @@ import {
   getPartConflictInfo,
   getTooltipText,
 } from "@/modules/watchConstructor/utils";
-import { HoverTooltip, Tooltip } from "@/shared/ui";
+import { HoverTooltip, InfoTooltip, Tooltip } from "@/shared/ui";
 import { watchConstructorApi } from "@/modules/watchConstructor/api/watchConstructorApi";
-// import { ArrowIcon } from "../icons";
 
 import styles from "./ImageCarousel.module.scss";
 
@@ -49,20 +48,6 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ className }) => {
     setCompatability(dependencyTree.compatability);
   };
 
-  // const handleClickUp = async () => {
-  //   const nextPartIndex =
-  //     chosenIndex - 1 < 0 ? tabParts.length - 1 : chosenIndex - 1;
-  //
-  //   await choosePart(tabParts[nextPartIndex]);
-  // };
-
-  // const handleClickDown = async () => {
-  //   const nextPartIndex =
-  //     chosenIndex + 1 >= tabParts.length ? 0 : chosenIndex + 1;
-  //
-  //   await choosePart(tabParts[nextPartIndex]);
-  // };
-
   const renderPartImage = (part: Part, index: number) => {
     const isDisabled = !compatiblePartIds.includes(part.id);
     const conflictInfo = getPartConflictInfo(part, currentWatch, compatability);
@@ -73,14 +58,13 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ className }) => {
           {getTooltipText(conflictInfo)}
         </Tooltip>
       ) : (
-        <Tooltip className={styles.infoTooltip} position={{ x: 0, y: 0 }}>
-          <div className={styles.infoTitle}>{part.name}</div>
+        <InfoTooltip position={{ x: 0, y: 0 }} title={part.name}>
           {part.description}
-        </Tooltip>
+        </InfoTooltip>
       );
 
     return (
-      <HoverTooltip key={index} tooltip={tooltip} position="left">
+      <HoverTooltip key={index} tooltip={tooltip} position="right">
         <img
           src={part.pictureUrl}
           alt="picture"
@@ -103,17 +87,6 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ className }) => {
           {tabParts.map(renderPartImage)}
         </div>
       </div>
-
-      {
-        // <div className={styles.controlls}>
-        //   <ArrowIcon className={styles.arrow} onClick={handleClickUp} />
-        //   <div className={styles.line}></div>
-        //   <ArrowIcon
-        //     className={clsx(styles.arrow, styles.bottom)}
-        //     onClick={handleClickDown}
-        //   />
-        // </div>
-      }
     </div>
   );
 };

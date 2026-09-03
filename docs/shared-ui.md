@@ -19,6 +19,8 @@ frontend/src/shared/ui
     Button        (variants: secondary (default), primary; props extend <button>, className appended last)
     Heading       (h2, font-size-xl from _variables)
     WatchlyLogo   (SVG icon, IconComponent)
+    Tooltip       (bare positional tooltip: children + position, portaled to body, pointer-events:none)
+    HoverTooltip  (hover wrapper: tracks cursor, cloneElement's caller tooltip with position, edge-flipping)
   molecules/      (reserved — currently empty)
   orgaisms/
     Header        (leftIcon | headerName | rightInfo)
@@ -46,6 +48,16 @@ frontend/src/shared/types
 - `runSequence(steps)` opens a stepper sequence (`confirmCurrentStep`/`dismissCurrentStep` advance/back,
   `onConfirm`/`onDismiss` hooks run before moving); Escape handled centrally in `ModalHost`
 - `ModalHost` is mounted once in `App.tsx` — do not render separate `Modal` instances
+
+### tooltip system (Tooltip + HoverTooltip):
+- `Tooltip` is a bare, position-aware primitive: renders `children` + `position: {x, y}` portaled to `document.body`,
+  `position: fixed`, `pointer-events: none`. Export `TooltipPosition` type.
+- `HoverTooltip` drives when/where: tracks the mouse on its wrapper and, on hover,
+  `cloneElement`s the injected `tooltip` element with a fresh `position`. Full edge-flipping (right/left + bottom/top).
+- the injected `tooltip` is typed `ReactElement<{ children; position }>` so any component accepting
+  `children + position` can be injected (not just `Tooltip`). The caller styles it (e.g. via a `className` on `Tooltip`);
+  styling overrides use `!important` per the Button convention.
+- usage: `<HoverTooltip tooltip={<Tooltip>...</Tooltip>}>children</HoverTooltip>` (see `docs/tooltips.md`)
 
 ### shared ui currently in use:
 - `WatchConstructorPage` / `OrdersClientPage` / `DbSeederPage`: BasePage + Header + WatchlyLogo shell

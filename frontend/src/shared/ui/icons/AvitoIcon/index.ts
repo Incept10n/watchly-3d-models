@@ -1,0 +1,1 @@
+export { AvitoIcon } from "./AvitoIcon";

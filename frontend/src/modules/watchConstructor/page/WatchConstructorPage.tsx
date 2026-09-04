@@ -21,7 +21,7 @@ import { watchConstructorApi } from "../api/watchConstructorApi";
 import { useWatchConstructor } from "../store";
 import { useModalStore } from "@/shared/store";
 import type { PartType } from "@/shared/types";
-import { BasePage, Header, WatchlyLogo } from "@/shared/ui";
+import { BasePage, Footer, Header, WatchlyLogo } from "@/shared/ui";
 
 import styles from "./WatchConstructorPage.module.scss";
 
@@ -102,7 +102,7 @@ export const WatchConstructorPage = () => {
           }
         />
       }
-      footer={<div></div>}
+      footer={<Footer className={styles.footer} />}
     >
       <PartTabs className={styles.tabs} />
       <ConstructorContainer className={styles.constructorContainer}>

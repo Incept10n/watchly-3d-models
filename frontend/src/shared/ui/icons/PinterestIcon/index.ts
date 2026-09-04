@@ -1,0 +1,1 @@
+export { PinterestIcon } from "./PinterestIcon";

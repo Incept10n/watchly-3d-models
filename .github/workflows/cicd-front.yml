@@ -47,6 +47,11 @@ jobs:
             VITE_AVITO_URL=${{ vars.VITE_AVITO_URL }}
             VITE_VK_URL=${{ vars.VITE_VK_URL }}
             VITE_EMAIL_URL=${{ vars.VITE_EMAIL_URL }}
+            VITE_PINTEREST_URL=${{ vars.VITE_PINTEREST_URL }}
+            VITE_YOUTUBE_URL=${{ vars.VITE_YOUTUBE_URL }}
+            VITE_OFFERTA_URL=${{ vars.VITE_OFFERTA_URL }}
+            VITE_PRIVACY_URL=${{ vars.VITE_PRIVACY_URL }}
+            VITE_CONSENT_URL=${{ vars.VITE_CONSENT_URL }}
 
   deploy-front-prod:
     name: Update k8s front image

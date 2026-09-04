@@ -13,15 +13,15 @@ type FooterLink = {
 
 const FOOTER_LINKS: FooterLink[] = [
   {
-    to: "<...>",
+    to: import.meta.env.VITE_OFFERTA_URL,
     text: "Публичная оферта",
   },
   {
-    to: "<...>",
+    to: import.meta.env.VITE_PRIVACY_URL,
     text: "Политика конфиденциальности",
   },
   {
-    to: "<...>",
+    to: import.meta.env.VITE_CONSENT_URL,
     text: "Согласие на обработку персональных данных",
   },
 ];
@@ -43,16 +43,16 @@ export const Footer: FC<FooterProps> = ({ className }) => {
       </div>
       <div className={styles.line} />
       <div className={styles.socialMediaLinksWrapper}>
-        <WatchlyLink to={""}>
+        <WatchlyLink to={import.meta.env.VITE_VK_URL}>
           <VkIcon />
         </WatchlyLink>
-        <WatchlyLink to={""}>
+        <WatchlyLink to={import.meta.env.VITE_PINTEREST_URL}>
           <PinterestIcon />
         </WatchlyLink>
-        <WatchlyLink to={""}>
+        <WatchlyLink to={import.meta.env.VITE_AVITO_URL}>
           <AvitoIcon />
         </WatchlyLink>
-        <WatchlyLink to={""}>
+        <WatchlyLink to={import.meta.env.VITE_YOUTUBE_URL}>
           <YouTubeIcon />
         </WatchlyLink>
       </div>

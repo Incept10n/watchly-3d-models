@@ -14,8 +14,6 @@ npm run db:seed
 
 ### TODO:
 1) main todo:
-    - footer with real links to the legal stuff and social media
-    - completely hide the image carousel (so that it doesn't fetch images from the backend)
     - fix links to the social media
 
 3) optimization problems:

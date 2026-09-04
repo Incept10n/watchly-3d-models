@@ -9,6 +9,7 @@ import {
   getTooltipText,
 } from "@/modules/watchConstructor/utils";
 import { HoverTooltip, InfoTooltip, Tooltip } from "@/shared/ui";
+import { useMediaQuery } from "@/shared/hooks";
 import { watchConstructorApi } from "@/modules/watchConstructor/api/watchConstructorApi";
 
 import styles from "./ImageCarousel.module.scss";
@@ -17,7 +18,11 @@ export type ImageCarouselProps = {
   className?: string;
 };
 
+const IS_COMPACT_QUERY = "(max-width: 1270px)";
+
 export const ImageCarousel: FC<ImageCarouselProps> = ({ className }) => {
+  const isCompact = useMediaQuery(IS_COMPACT_QUERY);
+
   const {
     currentTab,
     currentWatch,
@@ -26,6 +31,10 @@ export const ImageCarousel: FC<ImageCarouselProps> = ({ className }) => {
     compatability,
     parts,
   } = useWatchConstructor();
+
+  if (isCompact) {
+    return null;
+  }
 
   const tabParts = parts.filter((part) => part.type === currentTab);
 

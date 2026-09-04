@@ -10,10 +10,6 @@
 
   overflow: hidden;
 
-  @media (max-width: 1270px) {
-    display: none;
-  }
-
   &::after {
     content: "";
     position: absolute;

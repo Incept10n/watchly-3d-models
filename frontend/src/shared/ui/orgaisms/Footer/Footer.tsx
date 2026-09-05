@@ -13,16 +13,12 @@ type FooterLink = {
 
 const FOOTER_LINKS: FooterLink[] = [
   {
-    to: import.meta.env.VITE_OFFERTA_URL,
+    to: "/public-offer",
     text: "Публичная оферта",
   },
   {
-    to: import.meta.env.VITE_PRIVACY_URL,
+    to: "/privacy-policy",
     text: "Политика конфиденциальности",
-  },
-  {
-    to: import.meta.env.VITE_CONSENT_URL,
-    text: "Согласие на обработку персональных данных",
   },
 ];
 

@@ -19,11 +19,13 @@ frontend/src/shared/ui
     Button        (variants: secondary (default), primary; props extend <button>, className appended last)
     Heading       (h2, font-size-xl from _variables)
     WatchlyLogo   (SVG icon, IconComponent)
+    WatchlyLink   (link styled per theme; renders react-router Link for `/internal` paths, <a> otherwise)
     Tooltip       (bare positional tooltip: children + position, portaled to body, pointer-events:none)
     HoverTooltip  (hover wrapper: tracks cursor, cloneElement's caller tooltip with position, edge-flipping)
   molecules/      (reserved — currently empty)
   orgaisms/
     Header        (leftIcon | headerName | rightInfo)
+    Footer        (Heading + legal links (/public-offer, /privacy-policy) + social icons from VITE_* urls)
     Modal         (portal overlay + panel, dismissible CloseIcon, zIndex, overlay-click close)
     ModalHost     (renders modal queue + sequence from useModalStore, Escape handling)
   templates/
@@ -61,6 +63,9 @@ frontend/src/shared/types
 
 ### shared ui currently in use:
 - `WatchConstructorPage` / `OrdersClientPage` / `DbSeederPage`: BasePage + Header + WatchlyLogo shell
+- `WatchConstructorPage` footer: `Footer` (legal docs = internal routes, social icons = VITE_* urls)
+- legal pages: `modules/legal/page/LegalPage` (title + markdown via react-markdown; hardcoded texts
+  in `frontend/src/data/legalDocs.ts`, routes `/public-offer` and `/privacy-policy` in `App.tsx`)
 - `Order`, `DbSeederPage`, orders/db-seeder crud: `Button` (primary actions)
 - cost displays (orders list/detail, part cards, order total): `RublesIcon`
 - order flow, contact us, delete confirmation: `useModalStore` + `ModalHost`

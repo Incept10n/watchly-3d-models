@@ -14,7 +14,7 @@ npm run db:seed
 
 ### TODO:
 1) main todo:
-    - fix links to the social media
+    - done: footer with real social media links (VITE_* env) and legal docs (hardcoded, /public-offer, /privacy-policy)
 
 3) optimization problems:
     - look at siyuan

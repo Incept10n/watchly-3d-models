@@ -1,0 +1,72 @@
+@use "@/shared/styles/variables";
+
+.legalPage {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 80px 60px;
+
+  .title {
+    font-size: variables.$font-size-xl;
+    margin-bottom: 24px;
+  }
+
+  .content {
+    line-height: 1.6;
+    font-size: variables.$font-size-base;
+
+    h1,
+    h2,
+    h3 {
+      margin: 24px 0 12px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+    }
+
+    p {
+      margin: 8px 0;
+    }
+
+    ul,
+    ol {
+      padding-left: 24px;
+      margin: 8px 0;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    }
+
+    a {
+      color: variables.$color-primary;
+    }
+  }
+}

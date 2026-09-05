@@ -11,9 +11,7 @@ VITE_EMAIL_URL=https://mail.yandex.ru/?to=Incept1on.hf@yandex.ru
 
 VITE_PINTEREST_URL=https://ru.pinterest.com/WatchlyCustom/
 VITE_YOUTUBE_URL=https://www.youtube.com/@watchly-custom
-
-# Full URLs of the legal docs hosted on the selling one-pager
-VITE_OFFERTA_URL=https://watchly.example.com/oferta
-VITE_PRIVACY_URL=https://watchly.example.com/privacy
-VITE_CONSENT_URL=https://watchly.example.com/soglasie
 ```
+
+Legal documents (public offer and privacy policy) are hardcoded in
+`src/data/legalDocs.ts` and rendered at `/public-offer` and `/privacy-policy`.

@@ -14,7 +14,6 @@ npm run db:seed
 
 ### TODO:
 1) main todo:
-    - fix links to the social media
 
 3) optimization problems:
     - look at siyuan

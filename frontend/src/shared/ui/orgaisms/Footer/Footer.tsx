@@ -35,8 +35,8 @@ export const Footer: FC<FooterProps> = ({ className }) => {
       <div className={styles.upperPart}>
         <Heading>Дизайн времени</Heading>
         <div className={styles.legallLinksWrapper}>
-          {FOOTER_LINKS.map((link) => (
-            <WatchlyLink to={link.to} isInternal={link.isInternal}>
+          {FOOTER_LINKS.map((link, index) => (
+            <WatchlyLink key={index} to={link.to} isInternal={link.isInternal}>
               {link.text}
             </WatchlyLink>
           ))}

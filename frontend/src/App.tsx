@@ -4,11 +4,12 @@ import { DbSeederPage } from "./modules/dbSeeder";
 import { PrivacyPolicyPage, PublicOfferPage } from "./modules/legal";
 import { OrdersClientPage } from "./modules/ordersClient";
 import { WatchConstructorPage } from "./modules/watchConstructor";
-import { ModalHost } from "./shared/ui";
+import { ModalHost, ScrollToTop } from "./shared/ui";
 
 export const App = () => {
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<WatchConstructorPage />} />
         <Route path="/seeder" element={<DbSeederPage />} />
@@ -20,4 +21,3 @@ export const App = () => {
     </>
   );
 };
-

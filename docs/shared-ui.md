@@ -19,6 +19,7 @@ frontend/src/shared/ui
     Button        (variants: secondary (default), primary; props extend <button>, className appended last)
     Heading       (h2, font-size-xl from _variables)
     WatchlyLogo   (SVG icon, IconComponent)
+    ScrollToTop   (scrolls window to top on route change)
     WatchlyLink   (link styled per theme; renders react-router Link when `isInternal`, <a> otherwise)
     Tooltip       (bare positional tooltip: children + position, portaled to body, pointer-events:none)
     HoverTooltip  (hover wrapper: tracks cursor, cloneElement's caller tooltip with position, edge-flipping)

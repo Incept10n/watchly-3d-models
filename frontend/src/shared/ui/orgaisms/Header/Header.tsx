@@ -1,7 +1,8 @@
 import type { FC, ReactNode } from "react";
+import { Link } from "react-router";
+import { Heading } from "../../atoms";
 
 import styles from "./Header.module.scss";
-import { Heading } from "../../atoms";
 
 export type HeaderProps = {
   leftIcon: ReactNode;
@@ -16,7 +17,9 @@ export const Header: FC<HeaderProps> = ({
 }) => {
   return (
     <div className={styles.header}>
-      {leftIcon}
+      <Link to="/" className={styles.logoLink}>
+        {leftIcon}
+      </Link>
       <Heading>{headerName}</Heading>
       {rightInfo}
     </div>

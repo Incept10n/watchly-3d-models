@@ -1,5 +1,18 @@
 @use "@/shared/styles/variables";
 
+.contactButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  background-color: transparent;
+
+  padding: 0;
+
+  cursor: pointer;
+}
+
 .legalPage {
   width: 100%;
   max-width: 900px;
@@ -70,3 +83,4 @@
     }
   }
 }
+

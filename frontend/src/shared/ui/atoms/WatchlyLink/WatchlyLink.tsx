@@ -6,22 +6,27 @@ import styles from "./WatchlyLink.module.scss";
 
 export type WatchlyLinkProps = {
   to: string;
+  isInternal: boolean;
   children?: ReactNode;
 };
 
-export const WatchlyLink: FC<WatchlyLinkProps> = ({ to, children }) => {
-  const isInternal = to.startsWith("/");
+export const WatchlyLink: FC<WatchlyLinkProps> = ({
+  to,
+  isInternal,
+  children,
+}) => {
+  const className = clsx(styles.watchlyLink);
 
   if (isInternal) {
     return (
-      <Link className={clsx(styles.watchlyLink, styles.className)} to={to}>
+      <Link className={className} to={to}>
         {children}
       </Link>
     );
   }
 
   return (
-    <a className={clsx(styles.watchlyLink, styles.className)} href={to}>
+    <a className={className} href={to}>
       {children}
     </a>
   );

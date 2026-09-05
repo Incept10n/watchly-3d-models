@@ -1,1 +1,1 @@
-export { LegalPage } from "./page";
+export { PrivacyPolicyPage, PublicOfferPage } from "./page";

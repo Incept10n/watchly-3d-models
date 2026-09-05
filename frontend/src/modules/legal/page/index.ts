@@ -1,1 +1,3 @@
-export { LegalPage } from "./LegalPage";
+export { PrivacyPolicyPage } from "./PrivacyPolicyPage";
+export { PublicOfferPage } from "./PublicOfferPage";
+

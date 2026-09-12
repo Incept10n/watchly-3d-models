@@ -170,6 +170,6 @@ export const PUBLIC_OFFER_CONTENT = `
 
 ## 12. Реквизиты и контакты продавца
 
-**Контактный email:**  Incept1on.hf@yandex.ru  
+**Контактный email:**  watchly@inceptech.ru  
 **Ссылка на сообщество / Avito:**  https://www.avito.ru/sankt-peterburg/predlozheniya_uslug/kastomnye_chasy_na_zakaz_8189036442
 `;

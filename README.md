@@ -14,6 +14,8 @@ npm run db:seed
 
 ### TODO:
 1) main todo:
+    - main optimization problems
+    - portfolio thingy (ask anton about it)
 
 3) optimization problems:
     - look at siyuan

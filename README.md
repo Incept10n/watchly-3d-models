@@ -13,15 +13,15 @@ npm run db:seed
 ```
 
 ### TODO:
-1) main todo:
-    - 404 page
-    - portfolio thingy (ask anton about it)
+1. main todo:
+    - add useGlobalErrorRedirect() into the error boundary (i think it should be there)
     - make production models
+    - figure out how to connect opencode to figma [link](https://composio.dev/toolkits/figma/framework/opencode)
     - create mobile version
-    - restrict access to /seeder and /orders urls
+    - restrict access to /seeder and /orders urls (figure out how restricted access would work)
 
-3) optimization problems:
+2. optimization problems:
     - server different resolution files for different kinds of screens (mobile, labtop, pc)
 
-4) refactor ideas:
+3. refactor ideas:
     - maybe put modal manager and tooltips into a srs/services or srs/lib folder and export needed stuff from there

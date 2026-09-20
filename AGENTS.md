@@ -27,6 +27,7 @@ Watch customizer: two independent apps (`backend`, `frontend`), each with its ow
 ## Frontend (`frontend/`) — Vite + React 19 + zustand + ramda + SCSS modules
 
 - Routes: `/` = watch constructor UI, `/seeder` = DB seeding UI, `/orders` = admin order list (`src/App.tsx`). No tests, no typecheck script; `npm run build` runs `tsc -b && vite build`. `npm run lint` = `eslint .`.
+- Page smoke test: `npm run test:e2e` (Playwright, `e2e/routes.spec.ts`) — builds via `vite preview` and opens every page, failing on uncaught errors, console errors, failed/4xx+ requests, assets served as fallback HTML (e.g. missing `.glb`), or an unexpected Error/404 page. Needs `npx playwright install chromium` once; the backend (locally running) is expected for pages that fetch data.
 - `@/` path alias maps to `src/` (vite + tsconfig). Modules use `.module.scss`, `clsx`, zustand stores. New `VITE_*` env vars must be declared in `src/env.d.ts` too.
 - API base comes from `VITE_BASE_URL` (frontend `.env`, e.g. `http://localhost:3000/api`) and must include the `/api` prefix; shared `request.ts` wraps `fetch`.
 - React Router v8: import from `react-router`, not `react-router-dom`.

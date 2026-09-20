@@ -14,7 +14,6 @@ npm run db:seed
 
 ### TODO:
 1. main todo:
-    - add useGlobalErrorRedirect() into the error boundary (i think it should be there)
     - make production models
     - figure out how to connect opencode to figma [link](https://composio.dev/toolkits/figma/framework/opencode)
     - create mobile version

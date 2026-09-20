@@ -42,7 +42,7 @@ Watch customizer: two independent apps (`backend`, `frontend`), each with its ow
     (`!important` is only a last resort when there is no other way around it)
   - error handling: React render errors are caught by `ErrorBoundary` (`modules/error`) which renders
     the `/error` page inline; global `error`/`unhandledrejection` events (except `AbortError`) redirect
-    to `/error` via `useGlobalErrorRedirect` (wired in `App.tsx`)
+    to `/error` via `useGlobalErrorRedirect` (hooked inside the `ErrorBoundary` component itself)
   - keep `App.tsx` small and routing-only (`Routes` + `ErrorBoundary` wrapper + hook calls); any other
     logic belongs in a module component/hook, never in `App.tsx`
   - text sizes must come from `@/shared/styles/_variables.scss` (`$font-size-*`, imported via

@@ -1,5 +1,6 @@
-import { Component, type ErrorInfo, type ReactNode } from "react";
+import { Component, type ErrorInfo, type FC, type ReactNode } from "react";
 
+import { useGlobalErrorRedirect } from "../../hooks";
 import { ErrorPage } from "../../page/ErrorPage";
 
 type ErrorBoundaryProps = {
@@ -10,7 +11,7 @@ type ErrorBoundaryState = {
   hasError: boolean;
 };
 
-export class ErrorBoundary extends Component<
+class ErrorBoundaryBase extends Component<
   ErrorBoundaryProps,
   ErrorBoundaryState
 > {
@@ -32,4 +33,10 @@ export class ErrorBoundary extends Component<
     return this.props.children;
   }
 }
+
+export const ErrorBoundary: FC<ErrorBoundaryProps> = ({ children }) => {
+  useGlobalErrorRedirect();
+
+  return <ErrorBoundaryBase>{children}</ErrorBoundaryBase>;
+};
 

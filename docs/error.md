@@ -15,20 +15,21 @@ frontend/src/modules/error
     ErrorContent/          (hero "ой!", heading, shared Buttons)
       ErrorContent.tsx
       ErrorContent.module.scss
-    ErrorBoundary/         (class component guard)
+    ErrorBoundary/         (class-capture guard + fn wrapper that hooks the global redirect)
       ErrorBoundary.tsx
   hooks/
     index.ts
-    useGlobalErrorRedirect.ts  (window error/unhandledrejection → /error, ignores AbortError)
+    useGlobalErrorRedirect.ts  (window error/unhandledrejection → /error, ignores AbortError, not exported publicly)
 ```
 
-### guard behaviour (App.tsx):
+### guard behaviour:
 - `<ErrorBoundary>` wraps the whole UI (Routes + ModalHost): any React render/lifecycle error
   swaps in `<ErrorPage/>` inline (SPA, no reload)
-- `useGlobalErrorRedirect` (modules/error/hooks) registers `window` `error` + `unhandledrejection`
-  listeners; non-`AbortError` failures are `console.error`-logged then routed to `/error` via
-  `useNavigate()` (SPA navigation — no reload, so console output survives). `App.tsx` itself stays
-  routing-only.
+- the exported `ErrorBoundary` is a function component that calls `useGlobalErrorRedirect()`
+  (modules/error/hooks) — registers `window` `error` + `unhandledrejection` listeners; non-`AbortError`
+  failures are `console.error`-logged then routed to `/error` via `useNavigate()` (SPA navigation — no
+  reload, so console output survives) — then renders the internal error-catching class guard, so the
+  hook needs no separate wiring in `App.tsx` and isn't exported from the module.
 - route `/error` → `<ErrorPage />`; `*` → 404 page
 
 ### behaviour of the page:

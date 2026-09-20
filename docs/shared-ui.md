@@ -72,6 +72,9 @@ frontend/src/shared/types
   constructor page.
 - `NotFoundPage` (modules/notFound, catch-all `*`): page shell in `page/` (positional-only scss),
   visuals in `components/`; uses shared `Button` as-is (no overrides) — see `docs/not-found.md`.
+- `ErrorBoundary` + `ErrorPage` (modules/error, route `/error`): `ErrorBoundary` wraps the whole UI
+  in `App.tsx` (render errors → inline `ErrorPage`; global `error`/`unhandledrejection` →
+  `/error`); shared `Button` as-is — see `docs/error.md`.
 - `Order`, `DbSeederPage`, orders/db-seeder crud: `Button` (primary actions)
 - cost displays (orders list/detail, part cards, order total): `RublesIcon`
 - order flow, contact us, delete confirmation: `useModalStore` + `ModalHost`

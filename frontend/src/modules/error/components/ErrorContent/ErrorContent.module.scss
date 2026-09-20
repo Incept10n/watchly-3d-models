@@ -1,0 +1,35 @@
+@use "@/shared/styles/variables";
+
+.hero {
+  font-family: "Anonymous Pro", "Courier New", monospace;
+  font-size: 240px;
+  line-height: 240px;
+  text-align: center;
+
+  padding-left: 50px;
+
+  color: #000000;
+
+  user-select: none;
+}
+
+.title {
+  margin-top: 60px;
+
+  font-family: "Anonymous Pro", "Courier New", monospace;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+
+  color: #000000;
+
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  gap: 35px;
+
+  margin-top: 36px;
+}
+

@@ -6,7 +6,7 @@ Watch customizer: two independent apps (`backend`, `frontend`), each with its ow
 
 - Per-module/client documentation lives in `docs/*.md`, one per feature plus shared UI:
   `docs/watch-constructor.md`, `docs/db-seeder-client.md`, `docs/orders-client.md`, `docs/shared-ui.md`,
-  `docs/not-found.md`.
+  `docs/not-found.md`, `docs/error.md`.
 - Read the relevant `docs/*` file **before** working on a module, and keep it in sync with the implementation (update endpoints/module structure, mark TODO items done).
 
 ## Shared UI (`frontend/src/shared/ui`)
@@ -39,6 +39,11 @@ Watch customizer: two independent apps (`backend`, `frontend`), each with its ow
     only positions the layout, never styles shared UI
   - use shared UI components as-is; never override their styles and never use `!important`
     (`!important` is only a last resort when there is no other way around it)
+  - error handling: React render errors are caught by `ErrorBoundary` (`modules/error`) which renders
+    the `/error` page inline; global `error`/`unhandledrejection` events (except `AbortError`) redirect
+    to `/error` via `useGlobalErrorRedirect` (wired in `App.tsx`)
+  - keep `App.tsx` small and routing-only (`Routes` + `ErrorBoundary` wrapper + hook calls); any other
+    logic belongs in a module component/hook, never in `App.tsx`
   - text sizes must come from `@/shared/styles/_variables.scss` (`$font-size-*`, imported via
     `@use "@/shared/styles/variables"`); never hardcode `font-size` in content text — an explicit
     size is allowed only for display/hero glyphs the token scale can't express (documented exception)

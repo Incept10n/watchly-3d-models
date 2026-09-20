@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { use, useMemo } from "react";
 import * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
 import type { FC } from "react";
@@ -15,6 +15,30 @@ const MAX_MODEL_DIMENSION = 0.5;
 // see-through. Hide those, but keep logo/label materials (BLEND with alpha 1).
 const GLASS_OPACITY_THRESHOLD = 0.95;
 
+// Self-hosted Draco decoder in /draco/ — the string 2nd arg makes useGLTF attach
+// a DRACOLoader pointed there; plain GLBs (no KHR_draco ext) load fine too.
+const DRACO_DECODER_PATH = "/draco/";
+
+const toDracoUrl = (url: string) => url.replace(/\.glb$/i, ".draco.glb");
+
+// Prefer the compressed .draco.glb sibling at runtime, falling back to the
+// original when it's missing. Existence is HEAD-checked once per model and
+// memoized so later mounts don't re-request.
+const resolvedUrlCache = new Map<string, Promise<string>>();
+
+const resolveModelUrl = (url: string): Promise<string> => {
+  const cached = resolvedUrlCache.get(url);
+  if (cached) return cached;
+
+  const dracoUrl = toDracoUrl(url);
+  const promise = fetch(dracoUrl, { method: "HEAD" })
+    .then((response) => (response.ok ? dracoUrl : url))
+    .catch(() => url);
+
+  resolvedUrlCache.set(url, promise);
+  return promise;
+};
+
 const isTranslucent = (material: THREE.Material) =>
   material.transparent && material.opacity < GLASS_OPACITY_THRESHOLD;
 
@@ -28,7 +52,9 @@ type LoadedModelProps = {
 };
 
 const LoadedModel: FC<LoadedModelProps> = ({ url, partType }) => {
-  const { scene } = useGLTF(url);
+  const modelName = use(resolveModelUrl(url));
+
+  const { scene } = useGLTF(modelName, DRACO_DECODER_PATH);
 
   const object = useMemo(() => {
     const size = new THREE.Box3()
@@ -38,7 +64,7 @@ const LoadedModel: FC<LoadedModelProps> = ({ url, partType }) => {
 
     if (maxDimension > MAX_MODEL_DIMENSION) {
       console.warn(
-        `[ThreeDModelDisplayer] model "${url}" is ${maxDimension.toFixed(2)}m — skipping it`,
+        `[ThreeDModelDisplayer] model "${modelName}" is ${maxDimension.toFixed(2)}m — skipping it`,
       );
       return null;
     }
@@ -74,7 +100,7 @@ const LoadedModel: FC<LoadedModelProps> = ({ url, partType }) => {
     }
 
     return clone;
-  }, [scene, partType, url]);
+  }, [scene, partType, modelName]);
 
   if (!object) return null;
 

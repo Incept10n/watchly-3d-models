@@ -98,6 +98,10 @@ ui
 index.ts
 ```
 
+additional frontend files/folders used by this module:
+- `frontend/scripts/compress-models.mjs`  (generate `.draco.glb` siblings via `npm run models:compress`)
+- `frontend/public/draco/`                  (self-hosted Draco decoder, see "model optimization" section)
+
 ### data flow:
 - initial load (`WatchConstructorPage`): `Promise.all([getAllParts(), getInitialPartsSequence()])`,
   then `setParts` + `changeCurrentWatch(match ids to parts by type)` + `setCompatability`.
@@ -115,6 +119,23 @@ index.ts
 - every GLB bakes a glass dome onto the dial; `PartModel` hides translucent glass (material opacity < 0.95)
   on non-CRYSTAL parts (children reparented so only glass geometry is hidden, not the whole subtree).
 - part tabs show Russian names; `currentTab` drives which type the pickers edit.
+
+### model optimization (Draco):
+- every model has a `.draco.glb` sibling (e.g. `case.glb` -> `case.draco.glb`) produced by
+  `npm run models:compress` in `frontend/` (`scripts/compress-models.mjs` wraps the `@gltf-transform/cli`
+  `draco` command, runs over ALL `public/models/**/*.glb`, skips already-present variants).
+- conversion is automated: `predev`/`prebuild` run `npm run models:compress` before `vite dev`/`vite build`,
+  so any new `.glb` dropped into `public/models/` automatically gets its `.draco.glb` sibling.
+- the Draco decoder is **self-hosted** in `frontend/public/draco/` (copied from
+  `node_modules/three/examples/jsm/libs/draco/`, root files only: `draco_decoder.js`, `draco_wasm_wrapper.js`,
+  `draco_decoder.wasm`). The three-stdlib `DRACOLoader` used by drei fetches exactly these three from
+  the decoder path.
+- `PartModel` prefers the compressed variant at runtime: it HEAD-checks the `*.draco.glb` existence once per
+  model (memoized) and falls back to the original `.glb` if missing — DB URLs (`/models/....glb`) stay
+  unchanged. Loading uses `useGLTF(url, "/draco/")`: the string 2nd arg makes drei attach a `DRACOLoader`
+  pointed at `/draco/`; plain GLBs (no `KHR_draco` extension) load fine through the same loader.
+- nginx long-caches `.glb` and `.wasm` (previously only images/css/js), so models aren't re-downloaded
+  each visit.
 
 TODO:
 - backend

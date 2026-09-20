@@ -95,11 +95,13 @@ export const ThreeDModelDisplayer: FC<ThreeDModelDisplayerProps> = ({
 
         <Bounds key={boundsKey} fit clip observe margin={0.95}>
           <Suspense fallback={null}>
-            {parts.map((part) => (
-              <ErrorBoundary key={`${part.type}-${part.id}`} fallback={null}>
-                <PartModel part={part} />
-              </ErrorBoundary>
-            ))}
+            <group>
+              {parts.map((part) => (
+                <ErrorBoundary key={`${part.type}-${part.id}`} fallback={null}>
+                  <PartModel part={part} />
+                </ErrorBoundary>
+              ))}
+            </group>
           </Suspense>
         </Bounds>
 

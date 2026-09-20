@@ -14,13 +14,13 @@ npm run db:seed
 
 ### TODO:
 1) main todo:
-    - main optimization problems
+    - 404 page
     - portfolio thingy (ask anton about it)
+    - make production models
+    - create mobile version
+    - restrict access to /seeder and /orders urls
 
 3) optimization problems:
-    - look at siyuan
-    - disable loading images for image carousel for small screens because
-    - optimized 3d models and images in overall
     - server different resolution files for different kinds of screens (mobile, labtop, pc)
 
 4) refactor ideas:

@@ -70,6 +70,8 @@ frontend/src/shared/types
   markdown from `modules/legal/textData` via the shared `LegalPage` renderer; routes `/public-offer` and
   `/privacy-policy` in `App.tsx`). Legal header carries the same contact button (ContactUsModal) as the
   constructor page.
+- `NotFoundPage` (modules/notFound, catch-all `*`): page shell in `page/` (positional-only scss),
+  visuals in `components/`; uses shared `Button` as-is (no overrides) — see `docs/not-found.md`.
 - `Order`, `DbSeederPage`, orders/db-seeder crud: `Button` (primary actions)
 - cost displays (orders list/detail, part cards, order total): `RublesIcon`
 - order flow, contact us, delete confirmation: `useModalStore` + `ModalHost`

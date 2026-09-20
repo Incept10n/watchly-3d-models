@@ -4,8 +4,9 @@ Watch customizer: two independent apps (`backend`, `frontend`), each with its ow
 
 ## Docs (`docs/`)
 
-- Per-module/client documentation lives in `docs/*.txt`, one per feature plus shared UI:
-  `docs/watch-constructor.txt`, `docs/db-seeder-client.txt`, `docs/orders-client.txt`, `docs/shared-ui.txt`.
+- Per-module/client documentation lives in `docs/*.md`, one per feature plus shared UI:
+  `docs/watch-constructor.md`, `docs/db-seeder-client.md`, `docs/orders-client.md`, `docs/shared-ui.md`,
+  `docs/not-found.md`.
 - Read the relevant `docs/*` file **before** working on a module, and keep it in sync with the implementation (update endpoints/module structure, mark TODO items done).
 
 ## Shared UI (`frontend/src/shared/ui`)
@@ -30,6 +31,17 @@ Watch customizer: two independent apps (`backend`, `frontend`), each with its ow
 - API base comes from `VITE_BASE_URL` (frontend `.env`, e.g. `http://localhost:3000/api`) and must include the `/api` prefix; shared `request.ts` wraps `fetch`.
 - React Router v8: import from `react-router`, not `react-router-dom`.
 - 3D rendering (`ThreeDModelDisplayer`) uses `three` + `@react-three/fiber` + `@react-three/drei` (drei `Bounds` auto-fits the camera, `OrbitControls` for rotate/zoom). New part exports: **copy GLBs from `3dModels/` to `frontend/public/models/`** (served at `/models/...`) **and** add a thumbnail to `frontend/public/pictures/` (`/pictures/...`). Empty `modelUrl` = part not rendered. All part exports share a dial-center origin (no per-part offsets).
+- **Frontend code conventions (hard rules)** — do not break these:
+  - SVG artwork = a React component exporting the `<svg>` markup (the `AvitoIcon` pattern,
+    `IconComponent = FC<SVGProps<SVGSVGElement>>`); never reference a raw `.svg` file
+  - if a component renders an `<svg>` icon, its name ends with `Icon` (PascalCase, e.g. `AvitoIcon`)
+  - a module's `page/` dir contains the component imported by `App.tsx`; its `.module.scss` (if any)
+    only positions the layout, never styles shared UI
+  - use shared UI components as-is; never override their styles and never use `!important`
+    (`!important` is only a last resort when there is no other way around it)
+  - text sizes must come from `@/shared/styles/_variables.scss` (`$font-size-*`, imported via
+    `@use "@/shared/styles/variables"`); never hardcode `font-size` in content text — an explicit
+    size is allowed only for display/hero glyphs the token scale can't express (documented exception)
 
 ## Deploy / infra
 

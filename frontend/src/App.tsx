@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router";
 
 import { DbSeederPage } from "./modules/dbSeeder";
 import { PrivacyPolicyPage, PublicOfferPage } from "./modules/legal";
+import { NotFoundPage } from "./modules/notFound";
 import { OrdersClientPage } from "./modules/ordersClient";
 import { WatchConstructorPage } from "./modules/watchConstructor";
 import { ModalHost, ScrollToTop } from "./shared/ui";
@@ -16,6 +17,7 @@ export const App = () => {
         <Route path="/orders" element={<OrdersClientPage />} />
         <Route path="/public-offer" element={<PublicOfferPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <ModalHost />
     </>

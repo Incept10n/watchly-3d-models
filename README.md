@@ -16,8 +16,9 @@ npm run db:seed
 1. main todo:
     - make production models
     - figure out how to connect opencode to figma [link](https://composio.dev/toolkits/figma/framework/opencode)
+    - learn thoroughly about this stuff [link](https://github.com/jsmastery-pro/skills)
+    - look at plan in development folder and plan what to do next
     - make order modal sequence "order by email" differently (look at plan side in develop)
-    - look at plan in development folder in order to know what to do next
     - add better loading animations to the site
     - create mobile version
     - delete unused features (like favourites for example)
